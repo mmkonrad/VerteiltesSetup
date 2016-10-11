@@ -4,10 +4,8 @@
 #sudo docker stop $(sudo docker ps -aq)
 #sudo docker rm -v $(sudo docker ps -aq)
 
-
-echo '#####################################################################################'
 source /home/ubuntu/VerteiltesSetup/stop_cont.sh
-echo '#####################################################################################'
+
 sudo docker pull bachelorproject/msi
 
 ADVERTISE_ADDRESS=`ifconfig eth0 2>/dev/null|awk '/inet addr:/ {print $2}'|sed 's/addr://'`
