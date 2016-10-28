@@ -17,6 +17,8 @@ services:
     restart: "unless-stopped"
   ui:
     image: bachelorproject/msi
+    environment:
+    - NO_PROXY=10.43.116.0/23
     restart: "unless-stopped"
     ports:
     - "3000:3000"

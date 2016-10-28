@@ -3,7 +3,7 @@
 ADVERTISE_ADDRESS=`ifconfig eth0 2>/dev/null|awk '/inet addr:/ {print $2}'|sed 's/addr://'`
 
 curl -L  https://github.com/coreos/etcd/releases/download/v2.3.3/etcd-v2.3.3-linux-amd64.tar.gz -o etcd-v2.3.3-linux-amd64.tar.gz
-tar xzvf etcd-v2.3.3-linux-amd64.tar.gz
+tar xzf etcd-v2.3.3-linux-amd64.tar.gz
 cd etcd-v2.3.3-linux-amd64
 sudo chmod a+x etcd
 sudo cp etcd /usr/local/bin/etcd 
