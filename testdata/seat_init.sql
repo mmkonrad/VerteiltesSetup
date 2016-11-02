@@ -18,6 +18,10 @@
 --
 -- Table structure for table `route`
 --
+DROP DATABASE IF EXISTS seatmanagement;
+DROP USER 'seatmanagement'@'%';
+DROP USER 'seatoverview'@'%';
+FLUSH PRIVILEGES;
 
 CREATE DATABASE seatmanagement;
 

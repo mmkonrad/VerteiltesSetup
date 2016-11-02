@@ -1,0 +1,119 @@
+consul:
+  image: progrium/consul
+  environment:
+  - NO_PROXY=10.43.116.0/23
+  container_name: consul
+  net: network
+  command: '-server -bootstrap-expect 1 -advertise 10.43.116.187'
+  ports:
+  - "8400:8400"
+  - "8500:8500"
+  - "8600:53/udp"
+seat_database:
+  image: mysql
+  net: network
+  environment:
+    - MYSQL_ROOT_PASSWORD=root
+    - SERVICE_NAME=seat_database
+    - NO_PROXY=10.43.116.0/23
+  container_name: seat_database
+  ports:
+  - "3306:3306"
+seat_database_copy:
+  image: mysql
+  net: network
+  environment:
+    - MYSQL_ROOT_PASSWORD=root
+    - SERVICE_NAME=seat_database_copy
+    - NO_PROXY=10.43.116.0/23
+  container_name: seat_database_copy
+  ports:
+  - "3309:3306"
+booking_database:
+  image: mysql
+  net: network
+  environment:
+    - MYSQL_ROOT_PASSWORD=root
+    - SERVICE_NAME=booking_database
+    - NO_PROXY=10.43.116.0/23
+  container_name: booking_database
+  ports:
+  - "3307:3306"
+customer_database:
+  image: mysql
+  net: network
+  environment:
+    - MYSQL_ROOT_PASSWORD=root
+    - SERVICE_NAME=customer_database
+    - NO_PROXY=10.43.116.0/23
+  container_name: customer_database
+  ports:
+  - "3308:3306"
+redis_main_locks:
+  environment:
+    - SERVICE_NAME=redis_main_locks
+    - NO_PROXY=10.43.116.0/23
+  image: redis
+  net: network
+  container_name: redis_main_locks
+  ports:
+  - "6379:6379"
+redis_ttl_locks:
+  environment:
+    - SERVICE_NAME= redis_ttl_locks
+    - NO_PROXY=10.43.116.0/23
+  image: redis
+  net: network
+  container_name: redis_ttl_locks
+  ports:
+  - "6380:6379"
+redis_main_guards:
+  environment:
+    - SERVICE_NAME=redis_main_guards
+    - NO_PROXY=10.43.116.0/23
+  image: redis
+  net: network
+  container_name: redis_main_guards
+  ports:
+  - "6381:6379"
+redis_ttl_guards:
+  environment:
+    - SERVICE_NAME=redis_ttl_guards
+    - NO_PROXY=10.43.116.0/23
+  image: redis
+  net: network
+  container_name: redis_ttl_guards
+  ports:
+  - "6382:6379"
+redis_pricing:
+  environment:
+    - SERVICE_NAME=redis_pricing
+    - NO_PROXY=10.43.116.0/23
+  image: redis
+  net: network
+  container_name: redis_pricing
+  ports:
+  - "6383:6379"
+rabbit:
+  environment:
+    - SERVICE_5672_NAME=rabbit
+    - NO_PROXY=10.43.116.0/23
+  image: bachelorproject/rabbitcluster
+  container_name: rabbit
+  hostname: rabbit
+  net: network
+  ports:
+  - "5672:5672"
+  - "15672:15672"
+cassandra-1:
+  image: cassandra
+  container_name: cassandra
+  environment:
+    - CASSANDRA_BROADCAST_ADDRESS=10.43.116.187
+    - SERVICE_9042_NAME=cassandra
+    - NO_PROXY=10.43.116.0/23
+  ports:
+  - "9042:9042"
+  net: network
+  restart: "unless-stopped"
+

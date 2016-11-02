@@ -15,10 +15,12 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+DROP USER 'customer'@'%';
+FLUSH PRIVILEGES;
 CREATE USER 'customer'@'%' IDENTIFIED BY 'customer';
 GRANT ALL ON customermanagement.* TO 'customer'@'%';
 
-
+DROP DATABASE IF EXISTS customermanagement;
 CREATE DATABASE customermanagement;
 
 USE customermanagement;
