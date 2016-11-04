@@ -1,0 +1,1281 @@
+{
+	"variables": [],
+	"info": {
+		"name": "seatoverview-jenkins",
+		"_postman_id": "cfa62805-9eaf-df4f-45ad-0a2609bf4258",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Test Montag",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\nvar jsonData = JSON.parse(responseBody);\nvar trainConnection = jsonData[0];\ntests[\"Two results\"] = jsonData.length == 2;\n\ntests[\"id is present\"] = trainConnection.hasOwnProperty(\"id\");\ntests[\"trainNumber is present\"] = trainConnection.hasOwnProperty(\"trainNumber\");\ntests[\"trainCategory is present\"] = trainConnection.hasOwnProperty(\"trainCategory\");\ntests[\"departureTime is present\"] = trainConnection.hasOwnProperty(\"departureTime\");\ntests[\"arrivalTime is present\"] = trainConnection.hasOwnProperty(\"arrivalTime\");\ntests[\"intermediateStations is present\"] = trainConnection.hasOwnProperty(\"intermediateStations\");\ntests[\"correct number of intermediate stations stops\"] = trainConnection[\"intermediateStations\"].length == 2;\ntests[\"correct arrival and departure times\"] = trainConnection[\"departureTime\"] === \"21-03-2016 10:00:00\" && trainConnection[\"arrivalTime\"] === \"21-03-2016 10:30:00\";\n"
+					}
+				}
+			],
+			"request": {
+				"url": "http://10.43.116.187:8080/get-train-connections?start=A&destination=D&day=21-03-2016&time=10:00&departure=true",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"name": "Correct Response",
+					"originalRequest": {
+						"url": "http://10.43.116.187:8080/get-train-connections?start=A&destination=D&day=21-03-2016&time=10:00&departure=true",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"enabled": true,
+								"description": "The mime type of this content"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"enabled": true
+							},
+							{
+								"key": "Cache-Control",
+								"name": "Cache-Control",
+								"value": "no-cache"
+							},
+							{
+								"key": "Postman-Token",
+								"name": "Postman-Token",
+								"value": "f61bb717-9085-5bf5-d5e3-73c4b1f46f8b"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "javascript",
+					"_postman_previewtype": "html",
+					"header": [
+						{
+							"name": "Content-Type",
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "Date",
+							"key": "Date",
+							"value": "Wed, 23 Mar 2016 07:40:13 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "Server",
+							"key": "Server",
+							"value": "Apache-Coyote/1.1",
+							"description": "A name for the server"
+						},
+						{
+							"name": "Transfer-Encoding",
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": "50",
+					"body": "[{\"id\":1,\"trainNumber\":1,\"trainCategory\":\"IC\",\"departureTime\":\"21-03-2016 10:00:00\",\"arrivalTime\":\"21-03-2016 10:30:00\",\"intermediateStations\":[{\"name\":\"B\",\"timeOfStop\":\"21-03-2016 10:10:00\"},{\"name\":\"C\",\"timeOfStop\":\"21-03-2016 10:20:00\"}]},{\"id\":15,\"trainNumber\":3,\"trainCategory\":\"IC\",\"departureTime\":\"21-03-2016 11:30:00\",\"arrivalTime\":\"21-03-2016 12:03:00\",\"intermediateStations\":[{\"name\":\"B\",\"timeOfStop\":\"21-03-2016 11:41:00\"},{\"name\":\"C\",\"timeOfStop\":\"21-03-2016 11:52:00\"}]}]"
+				}
+			]
+		},
+		{
+			"name": "Test Dienstag",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\nvar jsonData = JSON.parse(responseBody);\nvar trainConnection = jsonData[0];\ntests[\"One train connection\"] = jsonData.length == 1;\n\ntests[\"id is present\"] = trainConnection.hasOwnProperty(\"id\");\ntests[\"trainNumber is present\"] = trainConnection.hasOwnProperty(\"trainNumber\");\ntests[\"trainCategory is present\"] = trainConnection.hasOwnProperty(\"trainCategory\");\ntests[\"departureTime is present\"] = trainConnection.hasOwnProperty(\"departureTime\");\ntests[\"arrivalTime is present\"] = trainConnection.hasOwnProperty(\"arrivalTime\");\ntests[\"intermediateStations is present\"] = trainConnection.hasOwnProperty(\"intermediateStations\");\ntests[\"correct number of intermediate stations stops\"] = trainConnection[\"intermediateStations\"].length == 2;\ntests[\"correct arrival and departure times\"] = trainConnection[\"departureTime\"] === \"22-03-2016 10:02:00\" && trainConnection[\"arrivalTime\"] === \"22-03-2016 10:32:00\";\n"
+					}
+				}
+			],
+			"request": {
+				"url": "http://10.43.116.187:8080/get-train-connections?start=A&destination=D&day=22-03-2016&time=10:00&departure=true",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Test Mittwoch",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\nvar jsonData = JSON.parse(responseBody);\nvar trainConnection = jsonData[0];\ntests[\"One train connection\"] = jsonData.length == 1;\n\ntests[\"id is present\"] = trainConnection.hasOwnProperty(\"id\");\ntests[\"trainNumber is present\"] = trainConnection.hasOwnProperty(\"trainNumber\");\ntests[\"trainCategory is present\"] = trainConnection.hasOwnProperty(\"trainCategory\");\ntests[\"departureTime is present\"] = trainConnection.hasOwnProperty(\"departureTime\");\ntests[\"arrivalTime is present\"] = trainConnection.hasOwnProperty(\"arrivalTime\");\ntests[\"intermediateStations is present\"] = trainConnection.hasOwnProperty(\"intermediateStations\");\ntests[\"correct number of intermediate stations stops\"] = trainConnection[\"intermediateStations\"].length == 2;\ntests[\"correct arrival and departure times\"] = trainConnection[\"departureTime\"] === \"23-03-2016 10:04:00\" && trainConnection[\"arrivalTime\"] === \"23-03-2016 10:34:00\";\n"
+					}
+				}
+			],
+			"request": {
+				"url": "http://10.43.116.187:8080/get-train-connections?start=A&destination=D&day=23-03-2016&time=10:00&departure=true",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Test Donnerstag",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\nvar jsonData = JSON.parse(responseBody);\nvar trainConnection = jsonData[0];\ntests[\"One train connection\"] = jsonData.length == 1;\n\ntests[\"id is present\"] = trainConnection.hasOwnProperty(\"id\");\ntests[\"trainNumber is present\"] = trainConnection.hasOwnProperty(\"trainNumber\");\ntests[\"trainCategory is present\"] = trainConnection.hasOwnProperty(\"trainCategory\");\ntests[\"departureTime is present\"] = trainConnection.hasOwnProperty(\"departureTime\");\ntests[\"arrivalTime is present\"] = trainConnection.hasOwnProperty(\"arrivalTime\");\ntests[\"intermediateStations is present\"] = trainConnection.hasOwnProperty(\"intermediateStations\");\ntests[\"correct number of intermediate stations stops\"] = trainConnection[\"intermediateStations\"].length == 2;\ntests[\"correct arrival and departure times\"] = trainConnection[\"departureTime\"] === \"24-03-2016 10:06:00\" && trainConnection[\"arrivalTime\"] === \"24-03-2016 10:36:00\";\n"
+					}
+				}
+			],
+			"request": {
+				"url": "http://10.43.116.187:8080/get-train-connections?start=A&destination=D&day=24-03-2016&time=10:00&departure=true",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Test Freitag",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\nvar jsonData = JSON.parse(responseBody);\nvar trainConnection = jsonData[0];\ntests[\"One train connection\"] = jsonData.length == 1;\n\ntests[\"id is present\"] = trainConnection.hasOwnProperty(\"id\");\ntests[\"trainNumber is present\"] = trainConnection.hasOwnProperty(\"trainNumber\");\ntests[\"trainCategory is present\"] = trainConnection.hasOwnProperty(\"trainCategory\");\ntests[\"departureTime is present\"] = trainConnection.hasOwnProperty(\"departureTime\");\ntests[\"arrivalTime is present\"] = trainConnection.hasOwnProperty(\"arrivalTime\");\ntests[\"intermediateStations is present\"] = trainConnection.hasOwnProperty(\"intermediateStations\");\ntests[\"correct number of intermediate stations stops\"] = trainConnection[\"intermediateStations\"].length == 2;\ntests[\"correct arrival and departure times\"] = trainConnection[\"departureTime\"] === \"25-03-2016 10:08:00\" && trainConnection[\"arrivalTime\"] === \"25-03-2016 10:38:00\";\n"
+					}
+				}
+			],
+			"request": {
+				"url": "http://10.43.116.187:8080/get-train-connections?start=A&destination=D&day=25-03-2016&time=10:00&departure=true",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Test Samstag",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\nvar jsonData = JSON.parse(responseBody);\nvar trainConnection = jsonData[0];\ntests[\"One train connection\"] = jsonData.length == 1;\n\ntests[\"id is present\"] = trainConnection.hasOwnProperty(\"id\");\ntests[\"trainNumber is present\"] = trainConnection.hasOwnProperty(\"trainNumber\");\ntests[\"trainCategory is present\"] = trainConnection.hasOwnProperty(\"trainCategory\");\ntests[\"departureTime is present\"] = trainConnection.hasOwnProperty(\"departureTime\");\ntests[\"arrivalTime is present\"] = trainConnection.hasOwnProperty(\"arrivalTime\");\ntests[\"intermediateStations is present\"] = trainConnection.hasOwnProperty(\"intermediateStations\");\ntests[\"correct number of intermediate stations stops\"] = trainConnection[\"intermediateStations\"].length == 2;\ntests[\"correct arrival and departure times\"] = trainConnection[\"departureTime\"] === \"26-03-2016 10:10:00\" && trainConnection[\"arrivalTime\"] === \"26-03-2016 10:40:00\";\n"
+					}
+				}
+			],
+			"request": {
+				"url": "http://10.43.116.187:8080/get-train-connections?start=A&destination=D&day=26-03-2016&time=10:00&departure=true",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Test Sonntag",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\nvar jsonData = JSON.parse(responseBody);\nvar trainConnection = jsonData[0];\ntests[\"One train connection\"] = jsonData.length == 1;\n\ntests[\"id is present\"] = trainConnection.hasOwnProperty(\"id\");\ntests[\"trainNumber is present\"] = trainConnection.hasOwnProperty(\"trainNumber\");\ntests[\"trainCategory is present\"] = trainConnection.hasOwnProperty(\"trainCategory\");\ntests[\"departureTime is present\"] = trainConnection.hasOwnProperty(\"departureTime\");\ntests[\"arrivalTime is present\"] = trainConnection.hasOwnProperty(\"arrivalTime\");\ntests[\"intermediateStations is present\"] = trainConnection.hasOwnProperty(\"intermediateStations\");\ntests[\"correct number of intermediate stations stops\"] = trainConnection[\"intermediateStations\"].length == 2;\ntests[\"correct arrival and departure times\"] = trainConnection[\"departureTime\"] === \"27-03-2016 10:12:00\" && trainConnection[\"arrivalTime\"] === \"27-03-2016 10:42:00\";\n"
+					}
+				}
+			],
+			"request": {
+				"url": "http://10.43.116.187:8080/get-train-connections?start=A&destination=D&day=27-03-2016&time=10:00&departure=true",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Zwei Stunden Fenster Test 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\nvar jsonData = JSON.parse(responseBody);\nvar trainConnection = jsonData[0];\ntests[\"Two results\"] = jsonData.length == 2;\n\ntests[\"id is present\"] = trainConnection.hasOwnProperty(\"id\");\ntests[\"trainNumber is present\"] = trainConnection.hasOwnProperty(\"trainNumber\");\ntests[\"trainCategory is present\"] = trainConnection.hasOwnProperty(\"trainCategory\");\ntests[\"departureTime is present\"] = trainConnection.hasOwnProperty(\"departureTime\");\ntests[\"arrivalTime is present\"] = trainConnection.hasOwnProperty(\"arrivalTime\");\ntests[\"intermediateStations is present\"] = trainConnection.hasOwnProperty(\"intermediateStations\");\ntests[\"correct number of intermediate stations stops\"]= trainConnection[\"intermediateStations\"].length == 2;\ntests[\"correct arrival and departure times\"] = trainConnection[\"departureTime\"] === \"21-03-2016 10:00:00\" && trainConnection[\"arrivalTime\"] === \"21-03-2016 10:30:00\";\n"
+					}
+				}
+			],
+			"request": {
+				"url": "http://10.43.116.187:8080/get-train-connections?start=A&destination=D&day=21-03-2016&time=10:00&departure=true",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Zwei Stunden Fenster Test 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\nvar jsonData = JSON.parse(responseBody);\nvar trainConnection = jsonData[0];\ntests[\"Two results\"] = jsonData.length == 2;\n\ntests[\"id is present\"] = trainConnection.hasOwnProperty(\"id\");\ntests[\"trainNumber is present\"] = trainConnection.hasOwnProperty(\"trainNumber\");\ntests[\"trainCategory is present\"] = trainConnection.hasOwnProperty(\"trainCategory\");\ntests[\"departureTime is present\"] = trainConnection.hasOwnProperty(\"departureTime\");\ntests[\"arrivalTime is present\"] = trainConnection.hasOwnProperty(\"arrivalTime\");\ntests[\"intermediateStations is present\"] = trainConnection.hasOwnProperty(\"intermediateStations\");\ntests[\"correct number of intermediate stations stops\"] = trainConnection[\"intermediateStations\"].length == 2;\ntests[\"correct arrival and departure times\"] = trainConnection[\"departureTime\"] === \"21-03-2016 10:00:00\" && trainConnection[\"arrivalTime\"] === \"21-03-2016 10:30:00\";\n"
+					}
+				}
+			],
+			"request": {
+				"url": "http://10.43.116.187:8080/get-train-connections?start=A&destination=D&day=21-03-2016&time=9:30&departure=true",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Test Departure False",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\nvar jsonData = JSON.parse(responseBody);\nvar trainConnection = jsonData[0];\ntests[\"One result\"] = jsonData.length == 2;\n\ntests[\"id is present\"] = trainConnection.hasOwnProperty(\"id\");\ntests[\"trainNumber is present\"] = trainConnection.hasOwnProperty(\"trainNumber\");\ntests[\"trainCategory is present\"] = trainConnection.hasOwnProperty(\"trainCategory\");\ntests[\"departureTime is present\"] = trainConnection.hasOwnProperty(\"departureTime\");\ntests[\"arrivalTime is present\"] = trainConnection.hasOwnProperty(\"arrivalTime\");\ntests[\"intermediateStations is present\"] = trainConnection.hasOwnProperty(\"intermediateStations\");\ntests[\"correct number of intermediate stations stops\"] = trainConnection[\"intermediateStations\"].length == 2;\ntests[\"correct arrival and departure times\"] = trainConnection[\"departureTime\"] === \"21-03-2016 10:00:00\" && trainConnection[\"arrivalTime\"] === \"21-03-2016 10:30:00\";\n"
+					}
+				}
+			],
+			"request": {
+				"url": "http://10.43.116.187:8080/get-train-connections?start=A&destination=D&day=21-03-2016&time=10:00&departure=true",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Test Departure False 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\nvar jsonData = JSON.parse(responseBody);\nvar trainConnection = jsonData[0];\ntests[\"One result\"] = jsonData.length == 1;\n\ntests[\"id is present\"] = trainConnection.hasOwnProperty(\"id\");\ntests[\"trainNumber is present\"] = trainConnection.hasOwnProperty(\"trainNumber\");\ntests[\"trainCategory is present\"] = trainConnection.hasOwnProperty(\"trainCategory\");\ntests[\"departureTime is present\"] = trainConnection.hasOwnProperty(\"departureTime\");\ntests[\"arrivalTime is present\"] = trainConnection.hasOwnProperty(\"arrivalTime\");\ntests[\"intermediateStations is present\"] = trainConnection.hasOwnProperty(\"intermediateStations\");\ntests[\"correct number of intermediate stations stops\"] = trainConnection[\"intermediateStations\"].length == 2;\ntests[\"correct arrival and departure times\"] = trainConnection[\"departureTime\"] === \"21-03-2016 11:30:00\" && trainConnection[\"arrivalTime\"] === \"21-03-2016 12:03:00\";\n"
+					}
+				}
+			],
+			"request": {
+				"url": "http://10.43.116.187:8080/get-train-connections?start=A&destination=D&day=21-03-2016&time=10:31&departure=false",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Test Verschiedene Strecken",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\nvar jsonData = JSON.parse(responseBody);\nvar trainConnection = jsonData[0];\ntests[\"One result\"] = jsonData.length == 1;\n\ntests[\"id is present\"] = trainConnection.hasOwnProperty(\"id\");\ntests[\"trainNumber is present\"] = trainConnection.hasOwnProperty(\"trainNumber\");\ntests[\"trainCategory is present\"] = trainConnection.hasOwnProperty(\"trainCategory\");\ntests[\"departureTime is present\"] = trainConnection.hasOwnProperty(\"departureTime\");\ntests[\"arrivalTime is present\"] = trainConnection.hasOwnProperty(\"arrivalTime\");\ntests[\"intermediateStations is present\"] = trainConnection.hasOwnProperty(\"intermediateStations\");\ntests[\"correct number of intermediate stations stops\"] = trainConnection[\"intermediateStations\"].length == 3;\ntests[\"correct arrival and departure times\"] = trainConnection[\"departureTime\"] === \"21-03-2016 10:00:00\" && trainConnection[\"arrivalTime\"] === \"21-03-2016 10:40:00\";\n"
+					}
+				}
+			],
+			"request": {
+				"url": "http://10.43.116.187:8080/get-train-connections?start=A&destination=E&day=21-03-2016&time=10:00&departure=true",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Test Zeiten Abends",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\nvar jsonData = JSON.parse(responseBody);\nvar trainConnection = jsonData[0];\ntests[\"One result\"] = jsonData.length == 1;\n\ntests[\"id is present\"] = trainConnection.hasOwnProperty(\"id\");\ntests[\"trainNumber is present\"] = trainConnection.hasOwnProperty(\"trainNumber\");\ntests[\"trainCategory is present\"] = trainConnection.hasOwnProperty(\"trainCategory\");\ntests[\"departureTime is present\"] = trainConnection.hasOwnProperty(\"departureTime\");\ntests[\"arrivalTime is present\"] = trainConnection.hasOwnProperty(\"arrivalTime\");\ntests[\"intermediateStations is present\"] = trainConnection.hasOwnProperty(\"intermediateStations\");\ntests[\"correct number of intermediate stations stops\"] = trainConnection[\"intermediateStations\"].length == 2;\ntests[\"correct arrival and departure times\"] = trainConnection[\"departureTime\"] === \"21-03-2016 18:00:00\" && trainConnection[\"arrivalTime\"] === \"21-03-2016 18:30:00\";\n"
+					}
+				}
+			],
+			"request": {
+				"url": "http://10.43.116.187:8080/get-train-connections?start=A&destination=D&day=21-03-2016&time=17:00&departure=true",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"name": "Correct Response",
+					"originalRequest": {
+						"url": "http://10.43.116.187:8080/get-train-connections?start=A&destination=D&day=21-03-2016&time=10:00&departure=true",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"enabled": true,
+								"description": "The mime type of this content"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"enabled": true
+							},
+							{
+								"key": "Cache-Control",
+								"name": "Cache-Control",
+								"value": "no-cache"
+							},
+							{
+								"key": "Postman-Token",
+								"name": "Postman-Token",
+								"value": "f61bb717-9085-5bf5-d5e3-73c4b1f46f8b"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "javascript",
+					"_postman_previewtype": "html",
+					"header": [
+						{
+							"name": "Content-Type",
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "Date",
+							"key": "Date",
+							"value": "Wed, 23 Mar 2016 07:40:13 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "Server",
+							"key": "Server",
+							"value": "Apache-Coyote/1.1",
+							"description": "A name for the server"
+						},
+						{
+							"name": "Transfer-Encoding",
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": "50",
+					"body": "[{\"id\":1,\"trainNumber\":1,\"trainCategory\":\"IC\",\"departureTime\":\"21-03-2016 10:00:00\",\"arrivalTime\":\"21-03-2016 10:30:00\",\"intermediateStations\":[{\"name\":\"B\",\"timeOfStop\":\"21-03-2016 10:10:00\"},{\"name\":\"C\",\"timeOfStop\":\"21-03-2016 10:20:00\"}]},{\"id\":15,\"trainNumber\":3,\"trainCategory\":\"IC\",\"departureTime\":\"21-03-2016 11:30:00\",\"arrivalTime\":\"21-03-2016 12:03:00\",\"intermediateStations\":[{\"name\":\"B\",\"timeOfStop\":\"21-03-2016 11:41:00\"},{\"name\":\"C\",\"timeOfStop\":\"21-03-2016 11:52:00\"}]}]"
+				}
+			]
+		},
+		{
+			"name": "Test Kein Zug",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Correct response body\"] = responseBody == \"There aren't any connections available\";\n\ntests[\"Status code is 404\"] = responseCode.code === 404;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://10.43.116.187:8080/get-train-connections?start=A&destination=D&day=21-03-2016&time=15:30&departure=true",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"name": "Correct Response",
+					"originalRequest": {
+						"url": "http://10.43.116.187:8080/get-train-connections?start=A&destination=D&day=21-03-2016&time=10:00&departure=true",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"enabled": true,
+								"description": "The mime type of this content"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"enabled": true
+							},
+							{
+								"key": "Cache-Control",
+								"name": "Cache-Control",
+								"value": "no-cache"
+							},
+							{
+								"key": "Postman-Token",
+								"name": "Postman-Token",
+								"value": "f61bb717-9085-5bf5-d5e3-73c4b1f46f8b"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "javascript",
+					"_postman_previewtype": "html",
+					"header": [
+						{
+							"name": "Content-Type",
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "Date",
+							"key": "Date",
+							"value": "Wed, 23 Mar 2016 07:40:13 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "Server",
+							"key": "Server",
+							"value": "Apache-Coyote/1.1",
+							"description": "A name for the server"
+						},
+						{
+							"name": "Transfer-Encoding",
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": "50",
+					"body": "[{\"id\":1,\"trainNumber\":1,\"trainCategory\":\"IC\",\"departureTime\":\"21-03-2016 10:00:00\",\"arrivalTime\":\"21-03-2016 10:30:00\",\"intermediateStations\":[{\"name\":\"B\",\"timeOfStop\":\"21-03-2016 10:10:00\"},{\"name\":\"C\",\"timeOfStop\":\"21-03-2016 10:20:00\"}]},{\"id\":15,\"trainNumber\":3,\"trainCategory\":\"IC\",\"departureTime\":\"21-03-2016 11:30:00\",\"arrivalTime\":\"21-03-2016 12:03:00\",\"intermediateStations\":[{\"name\":\"B\",\"timeOfStop\":\"21-03-2016 11:41:00\"},{\"name\":\"C\",\"timeOfStop\":\"21-03-2016 11:52:00\"}]}]"
+				}
+			]
+		},
+		{
+			"name": "Rückfahrt",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\nvar jsonData = JSON.parse(responseBody);\nvar trainConnection = jsonData[0];\ntests[\"One result\"] = jsonData.length == 1;\n\ntests[\"id is present\"] = trainConnection.hasOwnProperty(\"id\");\ntests[\"trainNumber is present\"] = trainConnection.hasOwnProperty(\"trainNumber\");\ntests[\"trainCategory is present\"] = trainConnection.hasOwnProperty(\"trainCategory\");\ntests[\"departureTime is present\"] = trainConnection.hasOwnProperty(\"departureTime\");\ntests[\"arrivalTime is present\"] = trainConnection.hasOwnProperty(\"arrivalTime\");\ntests[\"intermediateStations is present\"] = trainConnection.hasOwnProperty(\"intermediateStations\");\ntests[\"correct number of intermediate stations stops\"] = trainConnection[\"intermediateStations\"].length == 2;\ntests[\"correct arrival and departure times\"] = trainConnection[\"departureTime\"] === \"21-03-2016 11:10:00\" && trainConnection[\"arrivalTime\"] === \"21-03-2016 11:40:00\";\n"
+					}
+				}
+			],
+			"request": {
+				"url": "http://10.43.116.187:8080/get-train-connections?start=D&destination=A&day=21-03-2016&time=10:00&departure=true",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"name": "Correct Response",
+					"originalRequest": {
+						"url": "http://10.43.116.187:8080/get-train-connections?start=A&destination=D&day=21-03-2016&time=10:00&departure=true",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"enabled": true,
+								"description": "The mime type of this content"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"enabled": true
+							},
+							{
+								"key": "Cache-Control",
+								"name": "Cache-Control",
+								"value": "no-cache"
+							},
+							{
+								"key": "Postman-Token",
+								"name": "Postman-Token",
+								"value": "f61bb717-9085-5bf5-d5e3-73c4b1f46f8b"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "javascript",
+					"_postman_previewtype": "html",
+					"header": [
+						{
+							"name": "Content-Type",
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "Date",
+							"key": "Date",
+							"value": "Wed, 23 Mar 2016 07:40:13 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "Server",
+							"key": "Server",
+							"value": "Apache-Coyote/1.1",
+							"description": "A name for the server"
+						},
+						{
+							"name": "Transfer-Encoding",
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": "50",
+					"body": "[{\"id\":1,\"trainNumber\":1,\"trainCategory\":\"IC\",\"departureTime\":\"21-03-2016 10:00:00\",\"arrivalTime\":\"21-03-2016 10:30:00\",\"intermediateStations\":[{\"name\":\"B\",\"timeOfStop\":\"21-03-2016 10:10:00\"},{\"name\":\"C\",\"timeOfStop\":\"21-03-2016 10:20:00\"}]},{\"id\":15,\"trainNumber\":3,\"trainCategory\":\"IC\",\"departureTime\":\"21-03-2016 11:30:00\",\"arrivalTime\":\"21-03-2016 12:03:00\",\"intermediateStations\":[{\"name\":\"B\",\"timeOfStop\":\"21-03-2016 11:41:00\"},{\"name\":\"C\",\"timeOfStop\":\"21-03-2016 11:52:00\"}]}]"
+				}
+			]
+		},
+		{
+			"name": "Fehlende Parameter",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\nvar jsonData = JSON.parse(responseBody);\nvar seat = jsonData[0];\n\ntests[\"id is present\"] = seat.hasOwnProperty(\"id\");\ntests[\"seatClass  is present\"] = seat.hasOwnProperty(\"seatClass\");\ntests[\"seatArea is present\"] = seat.hasOwnProperty(\"seatArea\");\ntests[\"seatLocation is present\"] = seat.hasOwnProperty(\"seatLocation\");\ntests[\"upperLevel  is present\"] = seat.hasOwnProperty(\"upperLevel\");\ntests[\"wagonID  is present\"] = seat.hasOwnProperty(\"wagonID\");\ntests[\"price  is present\"] = seat.hasOwnProperty(\"price\");\ntests[\"Number of seats is correct\"] = jsonData.length == 1;\ntests[\"Class is correct\"] = jsonData[0][\"seatClass\"] == 1;\n\n\ntests[\"Status code is 200\"] = responseCode.code === 200;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://10.43.116.187:8080/get-seats-recommendation?trainConnectionID=1&seatClass=1&numberOfPersons=1&arrival=10:30&departure=10:00&day=21-03-2016",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"name": "Correct Response",
+					"originalRequest": {
+						"url": "http://10.43.116.187:8080/get-train-connections?start=A&destination=D&day=21-03-2016&time=10:00&departure=true",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"enabled": true,
+								"description": "The mime type of this content"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"enabled": true
+							},
+							{
+								"key": "Cache-Control",
+								"name": "Cache-Control",
+								"value": "no-cache"
+							},
+							{
+								"key": "Postman-Token",
+								"name": "Postman-Token",
+								"value": "f61bb717-9085-5bf5-d5e3-73c4b1f46f8b"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "javascript",
+					"_postman_previewtype": "html",
+					"header": [
+						{
+							"name": "Content-Type",
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "Date",
+							"key": "Date",
+							"value": "Wed, 23 Mar 2016 07:40:13 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "Server",
+							"key": "Server",
+							"value": "Apache-Coyote/1.1",
+							"description": "A name for the server"
+						},
+						{
+							"name": "Transfer-Encoding",
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": "50",
+					"body": "[{\"id\":1,\"trainNumber\":1,\"trainCategory\":\"IC\",\"departureTime\":\"21-03-2016 10:00:00\",\"arrivalTime\":\"21-03-2016 10:30:00\",\"intermediateStations\":[{\"name\":\"B\",\"timeOfStop\":\"21-03-2016 10:10:00\"},{\"name\":\"C\",\"timeOfStop\":\"21-03-2016 10:20:00\"}]},{\"id\":15,\"trainNumber\":3,\"trainCategory\":\"IC\",\"departureTime\":\"21-03-2016 11:30:00\",\"arrivalTime\":\"21-03-2016 12:03:00\",\"intermediateStations\":[{\"name\":\"B\",\"timeOfStop\":\"21-03-2016 11:41:00\"},{\"name\":\"C\",\"timeOfStop\":\"21-03-2016 11:52:00\"}]}]"
+				}
+			]
+		},
+		{
+			"name": "Platzanzeige 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\nvar jsonData = JSON.parse(responseBody);\nvar seat = jsonData[0];\n\ntests[\"Anzahl Plätze ist korrekt\"] = jsonData.length == 1;\ntests[\"Klasse ist korrekt\"] = jsonData[0][\"seatClass\"] == 2;\ntests[\"ID ist korrekt\"] = jsonData[0][\"id\"] == 1;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://10.43.116.187:8080/get-seats-recommendation?trainConnectionID=2&seatClass=2&numberOfPersons=1&arrival=10:20&departure=10:00&day=18-04-2016",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Platzanzeige 1 nochmal",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\nvar jsonData = JSON.parse(responseBody);\nvar seat = jsonData[0];\n\ntests[\"Anzahl Plätze ist korrekt\"] = jsonData.length == 1;\ntests[\"Klasse ist korrekt\"] = jsonData[0][\"seatClass\"] == 2;\ntests[\"ID ist korrekt\"] = jsonData[0][\"id\"] == 2;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://10.43.116.187:8080/get-seats-recommendation?trainConnectionID=2&seatClass=2&numberOfPersons=1&arrival=10:20&departure=10:00&day=18-04-2016",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Platzanzeige 1 andere Zeit 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\nvar jsonData = JSON.parse(responseBody);\nvar seat = jsonData[0];\n\ntests[\"Anzahl Plätze ist korrekt\"] = jsonData.length == 1;\ntests[\"Klasse ist korrekt\"] = jsonData[0][\"seatClass\"] == 2;\ntests[\"ID ist korrekt\"] = jsonData[0][\"id\"] == 1;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://10.43.116.187:8080/get-seats-recommendation?trainConnectionID=2&seatClass=2&numberOfPersons=1&arrival=10:30&departure=10:20&day=18-04-2016",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Platzanzeige 1 andere Zeit 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var jsonData = JSON.parse(responseBody);\nvar seat = jsonData[0];\n\ntests[\"Anzahl Plätze ist korrekt\"] = jsonData.length == 1;\ntests[\"Klasse ist korrekt\"] = jsonData[0][\"seatClass\"] == 2;\ntests[\"ID ist korrekt\"] = jsonData[0][\"id\"] == 3;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://10.43.116.187:8080/get-seats-recommendation?trainConnectionID=2&seatClass=2&numberOfPersons=1&arrival=10:45&departure=10:15&day=18-04-2016",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Platzanzeige 1 andere Zeit 4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var jsonData = JSON.parse(responseBody);\nvar seat = jsonData[0];\n\ntests[\"Anzahl Plätze ist korrekt\"] = jsonData.length == 1;\ntests[\"Klasse ist korrekt\"] = jsonData[0][\"seatClass\"] == 2;\ntests[\"ID ist korrekt\"] = jsonData[0][\"id\"] == 3;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://10.43.116.187:8080/get-seats-recommendation?trainConnectionID=2&seatClass=2&numberOfPersons=1&arrival=10:01&departure=09:00&day=18-04-2016",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Platzanzeige 1 andere Zeit 5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\nvar jsonData = JSON.parse(responseBody);\nvar seat = jsonData[0];\n\ntests[\"Anzahl Plätze ist korrekt\"] = jsonData.length == 1;\ntests[\"Klasse ist korrekt\"] = jsonData[0][\"seatClass\"] == 2;\ntests[\"ID ist korrekt\"] = jsonData[0][\"id\"] == 1;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://10.43.116.187:8080/get-seats-recommendation?trainConnectionID=2&seatClass=2&numberOfPersons=1&arrival=09:50&departure=09:00&day=18-04-2016",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Lock auf die Plätze entfernen",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Korrekt Body\"] = responseBody == \"Unlocked Seats\";\ntests[\"Status code is 200\"] = responseCode.code === 200;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://10.43.116.187:8080/unlock-seats",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {    \n        \"seatID\": 1,\n        \"trainConnectionID\": 2,\n        \"departureTime\":\"18-04-2016 10:00\",\n        \"arrivalTime\":\"18-04-2016 10:20\"\n    }\n]"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Platzanzeige 1 - nach Löschen",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\nvar jsonData = JSON.parse(responseBody);\nvar seat = jsonData[0];\n\ntests[\"Anzahl Plätze ist korrekt\"] = jsonData.length == 1;\ntests[\"Klasse ist korrekt\"] = jsonData[0][\"seatClass\"] == 2;\ntests[\"ID ist korrekt\"] = jsonData[0][\"id\"] == 1;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://10.43.116.187:8080/get-seats-recommendation?trainConnectionID=2&seatClass=2&numberOfPersons=1&arrival=10:20&departure=10:00&day=18-04-2016",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Kunde lehnt ab",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Korrekt Body\"] = responseBody == \"Unlocked Seats\";\ntests[\"Status code is 200\"] = responseCode.code === 200;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://10.43.116.187:8080/unlock-seats",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {    \n        \"seatID\": 1,\n        \"trainConnectionID\": 2,\n        \"departureTime\":\"18-04-2016 10:00\",\n        \"arrivalTime\":\"18-04-2016 10:20\"\n    }\n]"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Alle Plätze anzeigen lassen ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\n\nvar body = JSON.parse(responseBody);\n\ntests[\"Korrekte Anzahl Plätze\"] =  body.length == 24;\ntests[\"Status code is 200\"] = responseCode.code === 200;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://10.43.116.187:8080/get-seats?trainConnectionID=1&seatClass=2&numberOfPersons=3&arrival=12:20&departure=12:00&day=18-04-2016",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": "An dieser Stelle wird nicht der Event Store einbezogen, weil das iterieren über die einzelnen Schlüssel zu aufwändig ist.\n\n\nEventuelle Inkonsistenz wird durch die anderen Sicherheitsschritte abgefangen."
+			},
+			"response": []
+		},
+		{
+			"name": "Platzanzeige 6",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\nvar jsonData = JSON.parse(responseBody);\nvar seat = jsonData[0];\n\ntests[\"Anzahl Plätze ist korrekt\"] = jsonData.length == 3;\ntests[\"Klasse ist korrekt\"] = jsonData[0][\"seatClass\"] == 2;\ntests[\"ID ist korrekt\"] = jsonData[0][\"id\"] == 1 && jsonData[1][\"id\"] == 2 && jsonData[2][\"id\"] == 3;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://10.43.116.187:8080/get-seats-recommendation?trainConnectionID=2&seatClass=2&numberOfPersons=3&arrival=12:20&departure=12:00&day=18-04-2016",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": "Ein anderer Kunde lässt sich in dieser Zeit einen Zug anzeigen."
+			},
+			"response": []
+		},
+		{
+			"name": "Kunde wählt Plätze, die schon belegt sind",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is Conflict\"] = responseCode.code === 409;\n\ntests[\"Responsebody is correct\"] = responseBody == \"Could not lock seats\";"
+					}
+				}
+			],
+			"request": {
+				"url": "http://10.43.116.187:8080/lock-seats",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {    \n        \"seatID\": 1,\n        \"trainConnectionID\": 2,\n        \"departureTime\":\"18-04-2016 12:00\",\n        \"arrivalTime\":\"18-04-2016 12:20\"\n    },\n    {    \n        \"seatID\": 2,\n        \"trainConnectionID\": 2,\n        \"departureTime\":\"18-04-2016 12:00\",\n        \"arrivalTime\":\"18-04-2016 12:20\"\n    }\n]"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Kunde wählt freie Plätze",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is OK\"] = responseCode.code === 200;\n\ntests[\"Responsebody is correct\"] = responseBody == \"Locked Seats\";"
+					}
+				}
+			],
+			"request": {
+				"url": "http://10.43.116.187:8080/lock-seats",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {    \n        \"seatID\": 7,\n        \"trainConnectionID\": 2,\n        \"departureTime\":\"18-04-2016 12:00\",\n        \"arrivalTime\":\"18-04-2016 12:20\"\n    },\n    {    \n        \"seatID\": 8,\n        \"trainConnectionID\": 2,\n        \"departureTime\":\"18-04-2016 12:00\",\n        \"arrivalTime\":\"18-04-2016 12:20\"\n    }\n]"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Platzanzeige - zu viele 1",
+			"request": {
+				"url": "http://10.43.116.187:8080/get-seats-recommendation?trainConnectionID=2&seatClass=2&numberOfPersons=8&arrival=11:00&departure=11:20&day=18-04-2016",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Platzanzeige - zu viele 2",
+			"request": {
+				"url": "http://10.43.116.187:8080/get-seats-recommendation?trainConnectionID=2&seatClass=2&numberOfPersons=8&arrival=11:00&departure=11:20&day=18-04-2016",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Platzanzeige - zu viele 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Reponse body is correct\"] = responseBody == \"There isn't a sufficient number of seats\";\n\ntests[\"Status code is 409\"] = responseCode.code == 409;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://10.43.116.187:8080/get-seats-recommendation?trainConnectionID=2&seatClass=2&numberOfPersons=8&arrival=11:00&departure=11:20&day=18-04-2016",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,1042 @@
+{
+	"variables": [],
+	"info": {
+		"name": "booking-jenkins copy",
+		"_postman_id": "c9c48542-ffb9-5412-96d6-c0f989f173e9",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "InitiateBookings",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Status code is 200\"] = responseCode.code === 200;\n\nvar jsonData = JSON.parse(responseBody);\ntests[\"Korrekte Länge\"] = jsonData.length = 3;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/initiate-partial-bookings?customerID=1&paymentMethod=Lastschrift",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n  {\r\n    \"seatID\": 1,\r\n    \"trainConnectionID\":2,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"28-03-2016 10:00\",\r\n    \"arrivalTime\": \"28-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  },\r\n  {\r\n    \"seatID\": 2,\r\n    \"trainConnectionID\":2,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"28-03-2016 10:00\",\r\n    \"arrivalTime\": \"28-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  },\r\n    {\r\n    \"seatID\": 3,\r\n    \"trainConnectionID\":2,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"28-03-2016 10:00\",\r\n    \"arrivalTime\": \"28-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  }\r\n  \r\n ]"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "InitiateBookings Failure",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is Conflict\"] = responseCode.code === 409;\n\nvar jsonData = JSON.parse(responseBody);\ntests[\"Conflict auf allen 3 Buchungen\"] = jsonData.length = 3;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/initiate-partial-bookings?customerID=1&paymentMethod=Lastschrift",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n  {\r\n    \"seatID\": 1,\r\n    \"trainConnectionID\":2,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"28-03-2016 10:00\",\r\n    \"arrivalTime\": \"28-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  },\r\n  {\r\n    \"seatID\": 2,\r\n    \"trainConnectionID\":2,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"28-03-2016 10:00\",\r\n    \"arrivalTime\": \"28-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  },\r\n    {\r\n    \"seatID\": 3,\r\n    \"trainConnectionID\":2,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"28-03-2016 10:00\",\r\n    \"arrivalTime\": \"28-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  }\r\n  \r\n ]"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "InitiateBookings Partial Failure",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is Conflict\"] = responseCode.code === 409;\n\nvar jsonData = JSON.parse(responseBody);\ntests[\"Conflict auf allen 3 Buchungen\"] = jsonData.length = 2;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/initiate-partial-bookings?customerID=1&paymentMethod=Lastschrift",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n  {\r\n    \"seatID\": 2,\r\n    \"trainConnectionID\":2,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"28-03-2016 10:00\",\r\n    \"arrivalTime\": \"28-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  },\r\n  {\r\n    \"seatID\": 3,\r\n    \"trainConnectionID\":2,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"28-03-2016 10:00\",\r\n    \"arrivalTime\": \"28-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  },\r\n    {\r\n    \"seatID\": 4,\r\n    \"trainConnectionID\":2,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"28-03-2016 10:00\",\r\n    \"arrivalTime\": \"28-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  }\r\n  \r\n ]"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "PartialBooking Ohne Failure wurde ausgeführt",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is Conflict\"] = responseCode.code === 409;\n\nvar jsonData = JSON.parse(responseBody);\ntests[\"Conflict auf allen 3 Buchungen\"] = jsonData.length = 1;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/initiate-partial-bookings?customerID=1&paymentMethod=Lastschrift",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n  {\r\n    \"seatID\": 4,\r\n    \"trainConnectionID\":2,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"28-03-2016 10:00\",\r\n    \"arrivalTime\": \"28-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  }\r\n]"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Buchungsabbruch",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is OK\"] = responseCode.code === 200;\n\ntests[\"Korrekter Response Body\"] = responseBody == \"Deleted partial bookings\";"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/cancel-partial-bookings",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[  {\r\n    \"seatID\": 1,\r\n    \"trainConnectionID\":2,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"28-03-2016 10:00\",\r\n    \"arrivalTime\": \"28-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  },\r\n    {\r\n    \"seatID\": 2,\r\n    \"trainConnectionID\":2,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"28-03-2016 10:00\",\r\n    \"arrivalTime\": \"28-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  },\r\n  {\r\n    \"seatID\": 3,\r\n    \"trainConnectionID\":2,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"28-03-2016 10:00\",\r\n    \"arrivalTime\": \"28-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  }\r\n]"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Buchung bestätigen",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\nvar booking = JSON.parse(responseBody);\n\nvar state = true;\n\nfor(var i = 0; i < booking[\"partialBookings\"].length; i++){\n    postman.setEnvironmentVariable(\"booking\" + (i+1), booking[\"partialBookings\"][i][\"partialBookingID\"]);\n    if (booking[\"partialBookings\"][0][\"state\"] != \"valid\"){\n        state  = false;\n    }\n}\ntests[\"paymentMethod is present\"] = booking.hasOwnProperty(\"paymentMethod\");\ntests[\"partialBookings is present\"] = booking.hasOwnProperty(\"partialBookings\");\ntests[\"number of partialBookings is correct\"] = booking[\"partialBookings\"].length == 3;\ntests[\"all states are valid\"] = state;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;\n\ntests[\"partialBooking has id\"] = booking[\"partialBookings\"][0].hasOwnProperty(\"partialBookingID\");\ntests[\"partialBooking has start\"] = booking[\"partialBookings\"][0].hasOwnProperty(\"start\");\ntests[\"partialBooking has destination\"] = booking[\"partialBookings\"][0].hasOwnProperty(\"destination\");\ntests[\"partialBooking has departure\"] = booking[\"partialBookings\"][0].hasOwnProperty(\"departureTime\");\ntests[\"partialBooking has arrival\"] = booking[\"partialBookings\"][0].hasOwnProperty(\"arrivalTime\");\ntests[\"partialBooking has price\"] = booking[\"partialBookings\"][0].hasOwnProperty(\"price\");\n\n"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/confirm-partial-bookings?customerID=1&paymentMethod=Lastschrift",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[  {\r\n    \"seatID\": 1,\r\n    \"trainConnectionID\":2,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"28-03-2016 10:00\",\r\n    \"arrivalTime\": \"28-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  },\r\n    {\r\n    \"seatID\": 2,\r\n    \"trainConnectionID\":2,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"28-03-2016 10:00\",\r\n    \"arrivalTime\": \"28-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  },\r\n  {\r\n    \"seatID\": 3,\r\n    \"trainConnectionID\":2,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"28-03-2016 10:00\",\r\n    \"arrivalTime\": \"28-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  }\r\n]"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Bookings",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\nvar booking_array = JSON.parse(responseBody);\nvar booking = booking_array[0];\n\nvar state = true;\n\nfor(var i = 0; i < booking_array.length; i++){\n    var _booking = booking_array[i];\n    for(var j = 0; j < _booking[\"partialBookings\"].length; j++){\n        if (_booking[\"partialBookings\"][j][\"state\"] != \"valid\"){\n            state  = false;\n        }\n    }\n\n}\n\ntests[\"correct number of bookings\"] = booking_array.length == 1;\n\ntests[\"paymentMethod\"] = booking.hasOwnProperty(\"paymentMethod\");\ntests[\"partialBookings\"] = booking.hasOwnProperty(\"partialBookings\");\ntests[\"Number of bookings is correct\"] = booking[\"partialBookings\"].length == 3;\ntests[\"State is valid\"] = state;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;\n\ntests[\"partialBooking has id\"] = booking[\"partialBookings\"][0].hasOwnProperty(\"partialBookingID\");\ntests[\"partialBooking has start\"] = booking[\"partialBookings\"][0].hasOwnProperty(\"start\");\ntests[\"partialBooking has destination\"] = booking[\"partialBookings\"][0].hasOwnProperty(\"destination\");\ntests[\"partialBooking has departure\"] = booking[\"partialBookings\"][0].hasOwnProperty(\"departureTime\") && booking[\"partialBookings\"][0][\"departureTime\"] == \"28-03-2016 10:00\";\ntests[\"partialBooking has arrival\"] = booking[\"partialBookings\"][0].hasOwnProperty(\"arrivalTime\") && booking[\"partialBookings\"][0][\"arrivalTime\"] == \"28-03-2016 10:30\";\ntests[\"partialBooking has price\"] = booking[\"partialBookings\"][0].hasOwnProperty(\"price\");"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/get-customer-bookings?customerID=1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n  {\r\n    \"seatID\": 1,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"21-03-2016 10:00\",\r\n    \"arrivalTime\": \"21-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  },\r\n  {\r\n    \"seatID\": 2,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"21-03-2016 10:00\",\r\n    \"arrivalTime\": \"21-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  },\r\n  {\r\n    \"seatID\": 3,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"21-03-2016 10:00\",\r\n    \"arrivalTime\": \"21-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  }]"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"name": "Correct Response",
+					"originalRequest": {
+						"url": "http://localhost:8080/confirm-partial-bookings?customerID=1&paymentMethod=Lastschrift",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"enabled": true
+							},
+							{
+								"key": "Cache-Control",
+								"name": "Cache-Control",
+								"value": "no-cache"
+							},
+							{
+								"key": "Postman-Token",
+								"name": "Postman-Token",
+								"value": "09f8cb4d-7d46-d021-084f-31ea0984323e"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": "[\r\n  {\r\n    \"seatID\": 1,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"21-03-2016 10:00\",\r\n    \"arrivalTime\": \"21-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  },\r\n  {\r\n    \"seatID\": 2,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"21-03-2016 10:00\",\r\n    \"arrivalTime\": \"21-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  },\r\n  {\r\n    \"seatID\": 3,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"21-03-2016 10:00\",\r\n    \"arrivalTime\": \"21-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  }]"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "javascript",
+					"_postman_previewtype": "html",
+					"header": [
+						{
+							"name": "Content-Type",
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8",
+							"description": ""
+						},
+						{
+							"name": "Date",
+							"key": "Date",
+							"value": "Wed, 23 Mar 2016 08:30:54 GMT",
+							"description": ""
+						},
+						{
+							"name": "Server",
+							"key": "Server",
+							"value": "Apache-Coyote/1.1",
+							"description": ""
+						},
+						{
+							"name": "Transfer-Encoding",
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"description": ""
+						}
+					],
+					"cookie": [],
+					"responseTime": "69",
+					"body": "{\"bookingID\":1,\"paymentMethod\":\"Lastschrift\",\"partialBookings\":[{\"lockEventID\":null,\"partialBookingID\":1,\"seatID\":1,\"trainConnectionID\":1,\"start\":\"A\",\"destination\":\"D\",\"departureTime\":\"21-03-2016 10:00\",\"arrivalTime\":\"21-03-2016 10:30\",\"price\":4.5,\"state\":null},{\"lockEventID\":null,\"partialBookingID\":2,\"seatID\":2,\"trainConnectionID\":1,\"start\":\"A\",\"destination\":\"D\",\"departureTime\":\"21-03-2016 10:00\",\"arrivalTime\":\"21-03-2016 10:30\",\"price\":4.5,\"state\":null},{\"lockEventID\":null,\"partialBookingID\":3,\"seatID\":3,\"trainConnectionID\":1,\"start\":\"A\",\"destination\":\"D\",\"departureTime\":\"21-03-2016 10:00\",\"arrivalTime\":\"21-03-2016 10:30\",\"price\":4.5,\"state\":null}]}"
+				}
+			]
+		},
+		{
+			"name": "Change Booking",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\nvar booking = JSON.parse(responseBody);\n\ntests[\"partialBookingID\"] = booking.hasOwnProperty(\"partialBookingID\");\ntests[\"seatID\"] = booking.hasOwnProperty(\"seatID\");\ntests[\"trainConnectionID\"] = booking.hasOwnProperty(\"trainConnectionID\");\ntests[\"start\"] = booking.hasOwnProperty(\"start\") && booking[\"start\"] == \"A\";\ntests[\"destination\"] = booking.hasOwnProperty(\"destination\") && booking[\"destination\"] == \"D\";\ntests[\"departureTime\"] = booking.hasOwnProperty(\"departureTime\") && booking[\"departureTime\"] ==  \"28-03-2016 10:00\";\ntests[\"arrivalTime\"] = booking.hasOwnProperty(\"arrivalTime\") && booking[\"arrivalTime\"] == \"28-03-2016 10:30\";\ntests[\"price\"] = booking.hasOwnProperty(\"price\");\ntests[\"state\"] = booking.hasOwnProperty(\"state\");"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/change-partial-booking?partialBookingID={{booking1}}",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n    \"seatID\": 2,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"D\",\r\n    \"destination\": \"E\",\r\n    \"departureTime\": \"28-03-2016 10:30\",\r\n    \"arrivalTime\": \"28-03-2016 10:40\",\r\n    \"price\": 4.5\r\n  }"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"name": "Correct Response",
+					"originalRequest": {
+						"url": "http://localhost:8080/confirm-partial-bookings?customerID=1&paymentMethod=Lastschrift",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"enabled": true
+							},
+							{
+								"key": "Cache-Control",
+								"name": "Cache-Control",
+								"value": "no-cache"
+							},
+							{
+								"key": "Postman-Token",
+								"name": "Postman-Token",
+								"value": "09f8cb4d-7d46-d021-084f-31ea0984323e"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": "[\r\n  {\r\n    \"seatID\": 1,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"21-03-2016 10:00\",\r\n    \"arrivalTime\": \"21-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  },\r\n  {\r\n    \"seatID\": 2,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"21-03-2016 10:00\",\r\n    \"arrivalTime\": \"21-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  },\r\n  {\r\n    \"seatID\": 3,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"21-03-2016 10:00\",\r\n    \"arrivalTime\": \"21-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  }]"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "javascript",
+					"_postman_previewtype": "html",
+					"header": [
+						{
+							"name": "Content-Type",
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8",
+							"description": ""
+						},
+						{
+							"name": "Date",
+							"key": "Date",
+							"value": "Wed, 23 Mar 2016 08:30:54 GMT",
+							"description": ""
+						},
+						{
+							"name": "Server",
+							"key": "Server",
+							"value": "Apache-Coyote/1.1",
+							"description": ""
+						},
+						{
+							"name": "Transfer-Encoding",
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"description": ""
+						}
+					],
+					"cookie": [],
+					"responseTime": "69",
+					"body": "{\"bookingID\":1,\"paymentMethod\":\"Lastschrift\",\"partialBookings\":[{\"lockEventID\":null,\"partialBookingID\":1,\"seatID\":1,\"trainConnectionID\":1,\"start\":\"A\",\"destination\":\"D\",\"departureTime\":\"21-03-2016 10:00\",\"arrivalTime\":\"21-03-2016 10:30\",\"price\":4.5,\"state\":null},{\"lockEventID\":null,\"partialBookingID\":2,\"seatID\":2,\"trainConnectionID\":1,\"start\":\"A\",\"destination\":\"D\",\"departureTime\":\"21-03-2016 10:00\",\"arrivalTime\":\"21-03-2016 10:30\",\"price\":4.5,\"state\":null},{\"lockEventID\":null,\"partialBookingID\":3,\"seatID\":3,\"trainConnectionID\":1,\"start\":\"A\",\"destination\":\"D\",\"departureTime\":\"21-03-2016 10:00\",\"arrivalTime\":\"21-03-2016 10:30\",\"price\":4.5,\"state\":null}]}"
+				}
+			]
+		},
+		{
+			"name": "Get Bookings - After Change",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\nvar booking_array = JSON.parse(responseBody);\nvar booking = booking_array[0];\n\nvar state = true;\n\nfor(var i = 0; i < booking_array.length; i++){\n    var _booking = booking_array[i];\n    for(var j = 0; j < _booking[\"partialBookings\"].length; j++){\n        if (_booking[\"partialBookings\"][j][\"state\"] != \"valid\"){\n            state  = false;\n        }\n    }\n\n}\n\ntests[\"correct number of bookings\"] = booking_array.length == 1;\n\ntests[\"paymentMethod\"] = booking.hasOwnProperty(\"paymentMethod\");\ntests[\"partialBookings\"] = booking.hasOwnProperty(\"partialBookings\");\ntests[\"Number of bookings is correct\"] = booking[\"partialBookings\"].length == 3;\ntests[\"State is valid\"] = state;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;\n\ntests[\"partialBooking has id\"] = booking[\"partialBookings\"][0].hasOwnProperty(\"partialBookingID\");\ntests[\"partialBooking has start\"] = booking[\"partialBookings\"][0].hasOwnProperty(\"start\");\ntests[\"partialBooking has destination\"] = booking[\"partialBookings\"][0].hasOwnProperty(\"destination\");\ntests[\"partialBooking has destination\"] = booking[\"partialBookings\"][0].hasOwnProperty(\"destination\");\ntests[\"partialBooking has departure\"] = booking[\"partialBookings\"][0].hasOwnProperty(\"departureTime\") && booking[\"partialBookings\"][0][\"departureTime\"] == \"28-03-2016 10:30\";\ntests[\"partialBooking has arrival\"] = booking[\"partialBookings\"][0].hasOwnProperty(\"arrivalTime\") && booking[\"partialBookings\"][0][\"arrivalTime\"] == \"28-03-2016 10:40\";\ntests[\"partialBooking has price\"] = booking[\"partialBookings\"][0].hasOwnProperty(\"price\");"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/get-customer-bookings?customerID=1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n  {\r\n    \"seatID\": 1,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"21-03-2016 10:00\",\r\n    \"arrivalTime\": \"21-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  },\r\n  {\r\n    \"seatID\": 2,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"21-03-2016 10:00\",\r\n    \"arrivalTime\": \"21-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  },\r\n  {\r\n    \"seatID\": 3,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"21-03-2016 10:00\",\r\n    \"arrivalTime\": \"21-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  }]"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"name": "Correct Response",
+					"originalRequest": {
+						"url": "http://localhost:8080/confirm-partial-bookings?customerID=1&paymentMethod=Lastschrift",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"enabled": true
+							},
+							{
+								"key": "Cache-Control",
+								"name": "Cache-Control",
+								"value": "no-cache"
+							},
+							{
+								"key": "Postman-Token",
+								"name": "Postman-Token",
+								"value": "09f8cb4d-7d46-d021-084f-31ea0984323e"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": "[\r\n  {\r\n    \"seatID\": 1,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"21-03-2016 10:00\",\r\n    \"arrivalTime\": \"21-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  },\r\n  {\r\n    \"seatID\": 2,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"21-03-2016 10:00\",\r\n    \"arrivalTime\": \"21-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  },\r\n  {\r\n    \"seatID\": 3,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"21-03-2016 10:00\",\r\n    \"arrivalTime\": \"21-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  }]"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "javascript",
+					"_postman_previewtype": "html",
+					"header": [
+						{
+							"name": "Content-Type",
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8",
+							"description": ""
+						},
+						{
+							"name": "Date",
+							"key": "Date",
+							"value": "Wed, 23 Mar 2016 08:30:54 GMT",
+							"description": ""
+						},
+						{
+							"name": "Server",
+							"key": "Server",
+							"value": "Apache-Coyote/1.1",
+							"description": ""
+						},
+						{
+							"name": "Transfer-Encoding",
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"description": ""
+						}
+					],
+					"cookie": [],
+					"responseTime": "69",
+					"body": "{\"bookingID\":1,\"paymentMethod\":\"Lastschrift\",\"partialBookings\":[{\"lockEventID\":null,\"partialBookingID\":1,\"seatID\":1,\"trainConnectionID\":1,\"start\":\"A\",\"destination\":\"D\",\"departureTime\":\"21-03-2016 10:00\",\"arrivalTime\":\"21-03-2016 10:30\",\"price\":4.5,\"state\":null},{\"lockEventID\":null,\"partialBookingID\":2,\"seatID\":2,\"trainConnectionID\":1,\"start\":\"A\",\"destination\":\"D\",\"departureTime\":\"21-03-2016 10:00\",\"arrivalTime\":\"21-03-2016 10:30\",\"price\":4.5,\"state\":null},{\"lockEventID\":null,\"partialBookingID\":3,\"seatID\":3,\"trainConnectionID\":1,\"start\":\"A\",\"destination\":\"D\",\"departureTime\":\"21-03-2016 10:00\",\"arrivalTime\":\"21-03-2016 10:30\",\"price\":4.5,\"state\":null}]}"
+				}
+			]
+		},
+		{
+			"name": "Delete Booking Success id = 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 200ms\"] = responseTime < 200;\n\ntests[\"lockEventID\"] = responseBody === \"Successfully deleted\";\n\ntests[\"Status code is 200\"] = responseCode.code === 200;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/delete-partial-booking?partialBookingID={{booking2}}",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n    \"seatID\": 2,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"D\",\r\n    \"destination\": \"E\",\r\n    \"departureTime\": \"28-03-2016 10:30\",\r\n    \"arrivalTime\": \"28-03-2016 10:40\",\r\n    \"price\": 4.5\r\n  }"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"name": "Correct Response",
+					"originalRequest": {
+						"url": "http://localhost:8080/confirm-partial-bookings?customerID=1&paymentMethod=Lastschrift",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"enabled": true
+							},
+							{
+								"key": "Cache-Control",
+								"name": "Cache-Control",
+								"value": "no-cache"
+							},
+							{
+								"key": "Postman-Token",
+								"name": "Postman-Token",
+								"value": "09f8cb4d-7d46-d021-084f-31ea0984323e"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": "[\r\n  {\r\n    \"seatID\": 1,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"21-03-2016 10:00\",\r\n    \"arrivalTime\": \"21-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  },\r\n  {\r\n    \"seatID\": 2,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"21-03-2016 10:00\",\r\n    \"arrivalTime\": \"21-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  },\r\n  {\r\n    \"seatID\": 3,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"21-03-2016 10:00\",\r\n    \"arrivalTime\": \"21-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  }]"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "javascript",
+					"_postman_previewtype": "html",
+					"header": [
+						{
+							"name": "Content-Type",
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8",
+							"description": ""
+						},
+						{
+							"name": "Date",
+							"key": "Date",
+							"value": "Wed, 23 Mar 2016 08:30:54 GMT",
+							"description": ""
+						},
+						{
+							"name": "Server",
+							"key": "Server",
+							"value": "Apache-Coyote/1.1",
+							"description": ""
+						},
+						{
+							"name": "Transfer-Encoding",
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"description": ""
+						}
+					],
+					"cookie": [],
+					"responseTime": "69",
+					"body": "{\"bookingID\":1,\"paymentMethod\":\"Lastschrift\",\"partialBookings\":[{\"lockEventID\":null,\"partialBookingID\":1,\"seatID\":1,\"trainConnectionID\":1,\"start\":\"A\",\"destination\":\"D\",\"departureTime\":\"21-03-2016 10:00\",\"arrivalTime\":\"21-03-2016 10:30\",\"price\":4.5,\"state\":null},{\"lockEventID\":null,\"partialBookingID\":2,\"seatID\":2,\"trainConnectionID\":1,\"start\":\"A\",\"destination\":\"D\",\"departureTime\":\"21-03-2016 10:00\",\"arrivalTime\":\"21-03-2016 10:30\",\"price\":4.5,\"state\":null},{\"lockEventID\":null,\"partialBookingID\":3,\"seatID\":3,\"trainConnectionID\":1,\"start\":\"A\",\"destination\":\"D\",\"departureTime\":\"21-03-2016 10:00\",\"arrivalTime\":\"21-03-2016 10:30\",\"price\":4.5,\"state\":null}]}"
+				}
+			]
+		},
+		{
+			"name": "Delete Booking  Failure",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 200ms\"] = responseTime < 200;\n\ntests[\"lockEventID\"] = responseBody === \"Could not delete\";\n\ntests[\"Status code is 400\"] = responseCode.code === 400;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/delete-partial-booking?partialBookingID={{booking2}}",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n    \"seatID\": 2,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"D\",\r\n    \"destination\": \"E\",\r\n    \"departureTime\": \"28-03-2016 10:30\",\r\n    \"arrivalTime\": \"28-03-2016 10:40\",\r\n    \"price\": 4.5\r\n  }"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"name": "Correct Response",
+					"originalRequest": {
+						"url": "http://localhost:8080/confirm-partial-bookings?customerID=1&paymentMethod=Lastschrift",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"enabled": true
+							},
+							{
+								"key": "Cache-Control",
+								"name": "Cache-Control",
+								"value": "no-cache"
+							},
+							{
+								"key": "Postman-Token",
+								"name": "Postman-Token",
+								"value": "09f8cb4d-7d46-d021-084f-31ea0984323e"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": "[\r\n  {\r\n    \"seatID\": 1,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"21-03-2016 10:00\",\r\n    \"arrivalTime\": \"21-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  },\r\n  {\r\n    \"seatID\": 2,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"21-03-2016 10:00\",\r\n    \"arrivalTime\": \"21-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  },\r\n  {\r\n    \"seatID\": 3,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"21-03-2016 10:00\",\r\n    \"arrivalTime\": \"21-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  }]"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "javascript",
+					"_postman_previewtype": "html",
+					"header": [
+						{
+							"name": "Content-Type",
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8",
+							"description": ""
+						},
+						{
+							"name": "Date",
+							"key": "Date",
+							"value": "Wed, 23 Mar 2016 08:30:54 GMT",
+							"description": ""
+						},
+						{
+							"name": "Server",
+							"key": "Server",
+							"value": "Apache-Coyote/1.1",
+							"description": ""
+						},
+						{
+							"name": "Transfer-Encoding",
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"description": ""
+						}
+					],
+					"cookie": [],
+					"responseTime": "69",
+					"body": "{\"bookingID\":1,\"paymentMethod\":\"Lastschrift\",\"partialBookings\":[{\"lockEventID\":null,\"partialBookingID\":1,\"seatID\":1,\"trainConnectionID\":1,\"start\":\"A\",\"destination\":\"D\",\"departureTime\":\"21-03-2016 10:00\",\"arrivalTime\":\"21-03-2016 10:30\",\"price\":4.5,\"state\":null},{\"lockEventID\":null,\"partialBookingID\":2,\"seatID\":2,\"trainConnectionID\":1,\"start\":\"A\",\"destination\":\"D\",\"departureTime\":\"21-03-2016 10:00\",\"arrivalTime\":\"21-03-2016 10:30\",\"price\":4.5,\"state\":null},{\"lockEventID\":null,\"partialBookingID\":3,\"seatID\":3,\"trainConnectionID\":1,\"start\":\"A\",\"destination\":\"D\",\"departureTime\":\"21-03-2016 10:00\",\"arrivalTime\":\"21-03-2016 10:30\",\"price\":4.5,\"state\":null}]}"
+				}
+			]
+		},
+		{
+			"name": "Get Bookings - After Deletion",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\nvar booking_array = JSON.parse(responseBody);\nvar booking = booking_array[0];\n\ntests[\"correct number of bookings\"] = booking_array.length == 1;\n\ntests[\"paymentMethod\"] = booking.hasOwnProperty(\"paymentMethod\");\ntests[\"partialBookings\"] = booking.hasOwnProperty(\"partialBookings\");\ntests[\"Anzahl Teilbuchungen ist korrekt\"] = booking[\"partialBookings\"].length == 2;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/get-customer-bookings?customerID=1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n  {\r\n    \"seatID\": 1,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"21-03-2016 10:00\",\r\n    \"arrivalTime\": \"21-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  },\r\n  {\r\n    \"seatID\": 2,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"21-03-2016 10:00\",\r\n    \"arrivalTime\": \"21-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  },\r\n  {\r\n    \"seatID\": 3,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"21-03-2016 10:00\",\r\n    \"arrivalTime\": \"21-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  }]"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"name": "Correct Response",
+					"originalRequest": {
+						"url": "http://localhost:8080/confirm-partial-bookings?customerID=1&paymentMethod=Lastschrift",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"enabled": true
+							},
+							{
+								"key": "Cache-Control",
+								"name": "Cache-Control",
+								"value": "no-cache"
+							},
+							{
+								"key": "Postman-Token",
+								"name": "Postman-Token",
+								"value": "09f8cb4d-7d46-d021-084f-31ea0984323e"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": "[\r\n  {\r\n    \"seatID\": 1,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"21-03-2016 10:00\",\r\n    \"arrivalTime\": \"21-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  },\r\n  {\r\n    \"seatID\": 2,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"21-03-2016 10:00\",\r\n    \"arrivalTime\": \"21-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  },\r\n  {\r\n    \"seatID\": 3,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"21-03-2016 10:00\",\r\n    \"arrivalTime\": \"21-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  }]"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "javascript",
+					"_postman_previewtype": "html",
+					"header": [
+						{
+							"name": "Content-Type",
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8",
+							"description": ""
+						},
+						{
+							"name": "Date",
+							"key": "Date",
+							"value": "Wed, 23 Mar 2016 08:30:54 GMT",
+							"description": ""
+						},
+						{
+							"name": "Server",
+							"key": "Server",
+							"value": "Apache-Coyote/1.1",
+							"description": ""
+						},
+						{
+							"name": "Transfer-Encoding",
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"description": ""
+						}
+					],
+					"cookie": [],
+					"responseTime": "69",
+					"body": "{\"bookingID\":1,\"paymentMethod\":\"Lastschrift\",\"partialBookings\":[{\"lockEventID\":null,\"partialBookingID\":1,\"seatID\":1,\"trainConnectionID\":1,\"start\":\"A\",\"destination\":\"D\",\"departureTime\":\"21-03-2016 10:00\",\"arrivalTime\":\"21-03-2016 10:30\",\"price\":4.5,\"state\":null},{\"lockEventID\":null,\"partialBookingID\":2,\"seatID\":2,\"trainConnectionID\":1,\"start\":\"A\",\"destination\":\"D\",\"departureTime\":\"21-03-2016 10:00\",\"arrivalTime\":\"21-03-2016 10:30\",\"price\":4.5,\"state\":null},{\"lockEventID\":null,\"partialBookingID\":3,\"seatID\":3,\"trainConnectionID\":1,\"start\":\"A\",\"destination\":\"D\",\"departureTime\":\"21-03-2016 10:00\",\"arrivalTime\":\"21-03-2016 10:30\",\"price\":4.5,\"state\":null}]}"
+				}
+			]
+		},
+		{
+			"name": "Buchung bestätigen Customer 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\n\nvar booking = JSON.parse(responseBody);\n\nvar state = true;\n\nfor(var i = 0; i < booking[\"partialBookings\"].length; i++){\n    if (booking[\"partialBookings\"][0][\"state\"] != \"valid\"){\n        state  = false;\n    }\n}\ntests[\"paymentMethod is present\"] = booking.hasOwnProperty(\"paymentMethod\");\ntests[\"partialBookings is present\"] = booking.hasOwnProperty(\"partialBookings\");\ntests[\"number of partialBookings is correct\"] = booking[\"partialBookings\"].length == 3;\ntests[\"all states are valid\"] = state;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;\n\ntests[\"partialBooking has id\"] = booking[\"partialBookings\"][0].hasOwnProperty(\"partialBookingID\");\ntests[\"partialBooking has start\"] = booking[\"partialBookings\"][0].hasOwnProperty(\"start\");\ntests[\"partialBooking has destination\"] = booking[\"partialBookings\"][0].hasOwnProperty(\"destination\");\ntests[\"partialBooking has departure\"] = booking[\"partialBookings\"][0].hasOwnProperty(\"departureTime\");\ntests[\"partialBooking has arrival\"] = booking[\"partialBookings\"][0].hasOwnProperty(\"arrivalTime\");\ntests[\"partialBooking has price\"] = booking[\"partialBookings\"][0].hasOwnProperty(\"price\");"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/confirm-partial-bookings?customerID=2&paymentMethod=Lastschrift",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[  {\r\n    \"seatID\": 1,\r\n    \"trainConnectionID\":2,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"29-03-2016 10:00\",\r\n    \"arrivalTime\": \"28-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  },\r\n    {\r\n    \"seatID\": 2,\r\n    \"trainConnectionID\":2,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"29-03-2016 10:00\",\r\n    \"arrivalTime\": \"29-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  },\r\n  {\r\n    \"seatID\": 4,\r\n    \"trainConnectionID\":2,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"29-03-2016 10:00\",\r\n    \"arrivalTime\": \"29-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  }\r\n]"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Disable Booking",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\n\n\nvar booking_array = JSON.parse(responseBody);\nvar booking = booking_array[0];\n\nvar state = true;\nvar seats = true;\nfor(var i = 0; i < booking_array.length; i++){\n    var _booking = booking_array[i];\n    for(var j = 0; j < _booking[\"partialBookings\"].length; j++){\n        if (_booking[\"partialBookings\"][j][\"state\"] != \"invalid\"){\n            state  = false;\n        }        \n        if (_booking[\"partialBookings\"][j][\"seatID\"] != 1 && _booking[\"partialBookings\"][j][\"seatID\"] != 2 && _booking[\"partialBookings\"][j][\"seatID\"] != 3){\n            seats  = false;\n        }\n    }\n\n}\n\n\ntests[\"Korrekte Anzahl an Kunden \"] = booking_array.length == 2;\n\ntests[\"CustomerID is present\"] = booking.hasOwnProperty(\"customerID\");\ntests[\"PartialBookingIDs are present\"] = booking.hasOwnProperty(\"partialBookings\");\ntests[\"State ist invalid\"] = state;\ntests[\"Seats are correct\"] = seats;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/disable-partial-bookings",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[1, 2, 3]"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"name": "Correct Response",
+					"originalRequest": {
+						"url": "http://localhost:8080/confirm-partial-bookings?customerID=1&paymentMethod=Lastschrift",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"enabled": true
+							},
+							{
+								"key": "Cache-Control",
+								"name": "Cache-Control",
+								"value": "no-cache"
+							},
+							{
+								"key": "Postman-Token",
+								"name": "Postman-Token",
+								"value": "09f8cb4d-7d46-d021-084f-31ea0984323e"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": "[\r\n  {\r\n    \"seatID\": 1,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"21-03-2016 10:00\",\r\n    \"arrivalTime\": \"21-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  },\r\n  {\r\n    \"seatID\": 2,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"21-03-2016 10:00\",\r\n    \"arrivalTime\": \"21-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  },\r\n  {\r\n    \"seatID\": 3,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"21-03-2016 10:00\",\r\n    \"arrivalTime\": \"21-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  }]"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "javascript",
+					"_postman_previewtype": "html",
+					"header": [
+						{
+							"name": "Content-Type",
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8",
+							"description": ""
+						},
+						{
+							"name": "Date",
+							"key": "Date",
+							"value": "Wed, 23 Mar 2016 08:30:54 GMT",
+							"description": ""
+						},
+						{
+							"name": "Server",
+							"key": "Server",
+							"value": "Apache-Coyote/1.1",
+							"description": ""
+						},
+						{
+							"name": "Transfer-Encoding",
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"description": ""
+						}
+					],
+					"cookie": [],
+					"responseTime": "69",
+					"body": "{\"bookingID\":1,\"paymentMethod\":\"Lastschrift\",\"partialBookings\":[{\"lockEventID\":null,\"partialBookingID\":1,\"seatID\":1,\"trainConnectionID\":1,\"start\":\"A\",\"destination\":\"D\",\"departureTime\":\"21-03-2016 10:00\",\"arrivalTime\":\"21-03-2016 10:30\",\"price\":4.5,\"state\":null},{\"lockEventID\":null,\"partialBookingID\":2,\"seatID\":2,\"trainConnectionID\":1,\"start\":\"A\",\"destination\":\"D\",\"departureTime\":\"21-03-2016 10:00\",\"arrivalTime\":\"21-03-2016 10:30\",\"price\":4.5,\"state\":null},{\"lockEventID\":null,\"partialBookingID\":3,\"seatID\":3,\"trainConnectionID\":1,\"start\":\"A\",\"destination\":\"D\",\"departureTime\":\"21-03-2016 10:00\",\"arrivalTime\":\"21-03-2016 10:30\",\"price\":4.5,\"state\":null}]}"
+				}
+			]
+		},
+		{
+			"name": "Get Bookings After Disabled Customer 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\n\nvar booking_array = JSON.parse(responseBody);\nvar booking = booking_array[0];\n\nvar state = true;\n\nfor(var i = 0; i < booking_array.length; i++){\n    var _booking = booking_array[i];\n    for(var j = 0; j < _booking[\"partialBookings\"].length; j++){\n        if (_booking[\"partialBookings\"][j][\"state\"] != \"invalid\"){\n            state  = false;\n        }\n    }\n\n}\n\ntests[\"correct number of bookings\"] = booking_array.length == 1;\n\ntests[\"paymentMethod\"] = booking.hasOwnProperty(\"paymentMethod\");\ntests[\"partialBookings\"] = booking.hasOwnProperty(\"partialBookings\");\ntests[\"Number of bookings is correct\"] = booking[\"partialBookings\"].length == 2;\ntests[\"State is valid\"] = state;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/get-customer-bookings?customerID=1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n  {\r\n    \"seatID\": 1,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"21-03-2016 10:00\",\r\n    \"arrivalTime\": \"21-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  },\r\n  {\r\n    \"seatID\": 2,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"21-03-2016 10:00\",\r\n    \"arrivalTime\": \"21-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  },\r\n  {\r\n    \"seatID\": 3,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"21-03-2016 10:00\",\r\n    \"arrivalTime\": \"21-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  }]"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"name": "Correct Response",
+					"originalRequest": {
+						"url": "http://localhost:8080/confirm-partial-bookings?customerID=1&paymentMethod=Lastschrift",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"enabled": true
+							},
+							{
+								"key": "Cache-Control",
+								"name": "Cache-Control",
+								"value": "no-cache"
+							},
+							{
+								"key": "Postman-Token",
+								"name": "Postman-Token",
+								"value": "09f8cb4d-7d46-d021-084f-31ea0984323e"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": "[\r\n  {\r\n    \"seatID\": 1,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"21-03-2016 10:00\",\r\n    \"arrivalTime\": \"21-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  },\r\n  {\r\n    \"seatID\": 2,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"21-03-2016 10:00\",\r\n    \"arrivalTime\": \"21-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  },\r\n  {\r\n    \"seatID\": 3,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"21-03-2016 10:00\",\r\n    \"arrivalTime\": \"21-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  }]"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "javascript",
+					"_postman_previewtype": "html",
+					"header": [
+						{
+							"name": "Content-Type",
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8",
+							"description": ""
+						},
+						{
+							"name": "Date",
+							"key": "Date",
+							"value": "Wed, 23 Mar 2016 08:30:54 GMT",
+							"description": ""
+						},
+						{
+							"name": "Server",
+							"key": "Server",
+							"value": "Apache-Coyote/1.1",
+							"description": ""
+						},
+						{
+							"name": "Transfer-Encoding",
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"description": ""
+						}
+					],
+					"cookie": [],
+					"responseTime": "69",
+					"body": "{\"bookingID\":1,\"paymentMethod\":\"Lastschrift\",\"partialBookings\":[{\"lockEventID\":null,\"partialBookingID\":1,\"seatID\":1,\"trainConnectionID\":1,\"start\":\"A\",\"destination\":\"D\",\"departureTime\":\"21-03-2016 10:00\",\"arrivalTime\":\"21-03-2016 10:30\",\"price\":4.5,\"state\":null},{\"lockEventID\":null,\"partialBookingID\":2,\"seatID\":2,\"trainConnectionID\":1,\"start\":\"A\",\"destination\":\"D\",\"departureTime\":\"21-03-2016 10:00\",\"arrivalTime\":\"21-03-2016 10:30\",\"price\":4.5,\"state\":null},{\"lockEventID\":null,\"partialBookingID\":3,\"seatID\":3,\"trainConnectionID\":1,\"start\":\"A\",\"destination\":\"D\",\"departureTime\":\"21-03-2016 10:00\",\"arrivalTime\":\"21-03-2016 10:30\",\"price\":4.5,\"state\":null}]}"
+				}
+			]
+		},
+		{
+			"name": "Get Bookings After Disabled Customer 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\n\nvar booking_array = JSON.parse(responseBody);\nvar booking = booking_array[0];\n\ntests[\"correct number of bookings\"] = booking_array.length == 1;\n\ntests[\"paymentMethod\"] = booking.hasOwnProperty(\"paymentMethod\");\ntests[\"partialBookings\"] = booking.hasOwnProperty(\"partialBookings\");\ntests[\"Number of bookings is correct\"] = booking[\"partialBookings\"].length == 3;\ntests[\"State is valid\"] = (booking[\"partialBookings\"][0][\"state\"] == \"invalid\" && booking[\"partialBookings\"][1][\"state\"] == \"invalid\" && booking[\"partialBookings\"][2][\"state\"] == \"valid\") || (booking[\"partialBookings\"][0][\"state\"] == \"valid\" && booking[\"partialBookings\"][1][\"state\"] == \"invalid\" && booking[\"partialBookings\"][2][\"state\"] == \"invalid\") || (booking[\"partialBookings\"][0][\"state\"] == \"invalid\" && booking[\"partialBookings\"][1][\"state\"] == \"valid\" && booking[\"partialBookings\"][2][\"state\"] == \"invalid\");"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/get-customer-bookings?customerID=2",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n  {\r\n    \"seatID\": 1,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"21-03-2016 10:00\",\r\n    \"arrivalTime\": \"21-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  },\r\n  {\r\n    \"seatID\": 2,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"21-03-2016 10:00\",\r\n    \"arrivalTime\": \"21-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  },\r\n  {\r\n    \"seatID\": 3,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"21-03-2016 10:00\",\r\n    \"arrivalTime\": \"21-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  }]"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"name": "Correct Response",
+					"originalRequest": {
+						"url": "http://localhost:8080/confirm-partial-bookings?customerID=1&paymentMethod=Lastschrift",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"enabled": true
+							},
+							{
+								"key": "Cache-Control",
+								"name": "Cache-Control",
+								"value": "no-cache"
+							},
+							{
+								"key": "Postman-Token",
+								"name": "Postman-Token",
+								"value": "09f8cb4d-7d46-d021-084f-31ea0984323e"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": "[\r\n  {\r\n    \"seatID\": 1,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"21-03-2016 10:00\",\r\n    \"arrivalTime\": \"21-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  },\r\n  {\r\n    \"seatID\": 2,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"21-03-2016 10:00\",\r\n    \"arrivalTime\": \"21-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  },\r\n  {\r\n    \"seatID\": 3,\r\n    \"trainConnectionID\":1,\r\n    \"start\": \"A\",\r\n    \"destination\": \"D\",\r\n    \"departureTime\": \"21-03-2016 10:00\",\r\n    \"arrivalTime\": \"21-03-2016 10:30\",\r\n    \"price\": 4.5\r\n  }]"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "javascript",
+					"_postman_previewtype": "html",
+					"header": [
+						{
+							"name": "Content-Type",
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8",
+							"description": ""
+						},
+						{
+							"name": "Date",
+							"key": "Date",
+							"value": "Wed, 23 Mar 2016 08:30:54 GMT",
+							"description": ""
+						},
+						{
+							"name": "Server",
+							"key": "Server",
+							"value": "Apache-Coyote/1.1",
+							"description": ""
+						},
+						{
+							"name": "Transfer-Encoding",
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"description": ""
+						}
+					],
+					"cookie": [],
+					"responseTime": "69",
+					"body": "{\"bookingID\":1,\"paymentMethod\":\"Lastschrift\",\"partialBookings\":[{\"lockEventID\":null,\"partialBookingID\":1,\"seatID\":1,\"trainConnectionID\":1,\"start\":\"A\",\"destination\":\"D\",\"departureTime\":\"21-03-2016 10:00\",\"arrivalTime\":\"21-03-2016 10:30\",\"price\":4.5,\"state\":null},{\"lockEventID\":null,\"partialBookingID\":2,\"seatID\":2,\"trainConnectionID\":1,\"start\":\"A\",\"destination\":\"D\",\"departureTime\":\"21-03-2016 10:00\",\"arrivalTime\":\"21-03-2016 10:30\",\"price\":4.5,\"state\":null},{\"lockEventID\":null,\"partialBookingID\":3,\"seatID\":3,\"trainConnectionID\":1,\"start\":\"A\",\"destination\":\"D\",\"departureTime\":\"21-03-2016 10:00\",\"arrivalTime\":\"21-03-2016 10:30\",\"price\":4.5,\"state\":null}]}"
+				}
+			]
+		}
+	]
+}

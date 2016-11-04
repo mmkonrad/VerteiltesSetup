@@ -1,0 +1,1548 @@
+{
+	"variables": [],
+	"info": {
+		"name": "seatmanagement-jenkins",
+		"_postman_id": "c9aad373-a3c0-3a7c-5251-f599fc3ecfe1",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "INSERT initial route ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Get the ID when creating a Station\"] = responseBody.has(\"id\");\n\ntests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/insert?type=route",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{}\r\n"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "INSERT initial station",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Get the ID when creating a Station\"] = responseBody.has(\"id\");\n\ntests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/insert?type=station",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\" : \"test\"\r\n}\r\n"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "INSERT initial route_station",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Get the ID when creating a Station\"] = responseBody.has(\"id\");\n\ntests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/insert?type=route_station",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"routeID\": 1,\r\n\"stationID\": 1,\r\n\"stopTime\": 0,\r\n\"platform\": 1\r\n}\r\n"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "INSERT initial train",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Get the ID when creating a Station\"] = responseBody.has(\"id\");\n\ntests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/insert?type=train",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"trainNumber\": 1234,\r\n    \"trainCategory\": \"IC\"\r\n}\r\n"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "INSERT initial wagon",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Get the ID when creating a Station\"] = responseBody.has(\"id\");\n\ntests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/insert?type=wagon",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n      \"state\": \"test\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "INSERT initial seat",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Get the ID when creating a Station\"] = responseBody.has(\"id\");\n\ntests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/insert?type=seat",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \"seatClass\": 1,\r\n    \"seatArea\": \"Ruhe\",\r\n    \"seatLocation\": \"Fenster\",\r\n    \"seatCompartmentType\": \"Grossraum\",\r\n    \"upperLevel\": false,\r\n    \"wagonID\": 1,\r\n    \"state\": \"test\"\r\n     \r\n }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "INSERT initial train_connection",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Get the ID when creating a Station\"] = responseBody.has(\"id\");\n\ntests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/insert?type=train_connection",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"routeID\": 1,\r\n    \"trainID\": 1,\r\n    \"departureTime\": \"10:40\",\r\n    \"dayOfWeek\": \"monday\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "INSERT initial seat_allocation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Get the ID when creating a Station\"] = responseBody.has(\"id\");\n\ntests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/insert?type=seat_allocation",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n    \"seatID\": 1,\r\n    \"trainConnectionID\": 1,\r\n    \"departureTime\": \"01-02-2015 10:20\",\r\n    \"arrivalTime\": \"01-02-2015 10:40\"\r\n  }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "INSERT initial wagon_train_connection",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Get the ID when creating a Station\"] = responseBody.has(\"id\");\n\ntests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/insert?type=wagon_train_connection",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n    \"wagonID\": 1,\r\n    \"trainConnectionID\": 1,\r\n    \"number\": 3\r\n  }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "INSERT initial train_connection_cancellation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Get the ID when creating a Station\"] = responseBody.has(\"id\");\n\ntests[\"Response time is less than 1000ms\"] = responseTime < 1000;\ntests[\"Status code is 200\"] = responseCode.code === 200;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/insert?type=train_connection_cancellation",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "   {\r\n    \"trainConnectionID\": 1,\r\n    \"day\": \"01-05-2015\"\r\n  }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "INSERT duplicate station",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "\ntests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 400\"] = responseCode.code === 400;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/insert?type=station",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\" : \"test\"\r\n}\r\n"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "INSERT duplicate route_station",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 400\"] = responseCode.code === 400;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/insert?type=route_station",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"routeID\": 1,\r\n\"stationID\": 1,\r\n\"stopTime\": 0,\r\n\"platform\": 1\r\n}\r\n"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "INSERT duplicate train",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 400\"] = responseCode.code === 400;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/insert?type=train",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"trainNumber\": 1234,\r\n    \"trainCategory\": \"IC\"\r\n}\r\n"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "INSERT duplicate train_connection",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 400\"] = responseCode.code === 400;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/insert?type=train_connection",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"routeID\": 1,\r\n    \"trainID\": 1,\r\n    \"departureTime\": \"10:40\",\r\n    \"dayOfWeek\": \"monday\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "INSERT duplicate wagon_train_connection",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 400\"] = responseCode.code === 400;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/insert?type=wagon_train_connection",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n    \"wagonID\": 1,\r\n    \"trainConnectionID\": 1,\r\n    \"number\": 3\r\n  }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "INSERT duplicate train_connection_cancellation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 400\"] = responseCode.code === 400;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/insert?type=train_connection_cancellation",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "   {\r\n    \"trainConnectionID\": 1,\r\n    \"day\": \"01-05-2015\"\r\n  }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "INSERT wrong_data route_station",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 400\"] = responseCode.code === 400;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/insert?type=route_station",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"routeID\": 100,\r\n\"stationID\": 100,\r\n\"stopTime\": \"abc\",\r\n\"platform\": 1\r\n}\r\n\r\n"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "INSERT wrong_data train",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 400\"] = responseCode.code === 400;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/insert?type=train",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"trainNumber\": \"abc\",\r\n    \"trainCategory\": \"IC\"\r\n}\r\n"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "INSERT wrong_data train_connection",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "\ntests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 400\"] = responseCode.code === 400;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/insert?type=train_connection",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"routeID\": 100,\r\n    \"trainID\": 100,\r\n    \"departureTime\": \"10:40\",\r\n    \"dayOfWeek\": \"monday\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "INSERT wrong_data seat_allocation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "\ntests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 400\"] = responseCode.code === 400;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/insert?type=seat_allocation",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n    \"seatID\": 100,\r\n    \"trainConnectionID\": 100,\r\n    \"departureTime\": \"01-02-2015 10:20\",\r\n    \"arrivalTime\": \"01-02-2015 10:40\"\r\n  }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "INSERT wrong_data wagon_train_connection",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 400\"] = responseCode.code === 400;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/insert?type=wagon_train_connection",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n    \"wagonID\": 100,\r\n    \"trainConnectionID\": 100,\r\n    \"number\": 3\r\n  }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "INSERT wrong_data train_connection_cancellation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 400\"] = responseCode.code === 400;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/insert?type=train_connection_cancellation",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "   {\r\n    \"trainConnectionID\": 100,\r\n    \"day\": \"01-05-2015\"\r\n  }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE initial station",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var data = JSON.parse(responseBody);\ntests[\"ResponseBody has correct name value\"] = data.name === \"test-update\";\n\n\ntests[\"Response time is less than 1000ms\"] = responseTime < 1000;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/update?id=1&type=station",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\" : \"test-update\"\r\n}\r\n"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE initial route_station",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var data = JSON.parse(responseBody);\ntests[\"ResponseBody has correct routeID value\"] = data.routeID === 1;\ntests[\"ResponseBody has correct stationID value\"] = data.stationID === 1;\ntests[\"ResponseBody has correct stopTime value\"] = data.stopTime === 60000;\ntests[\"ResponseBody has correct platform value\"] = data.platform === 1000;\n\n\ntests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/update?id=1&type=route_station",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"routeID\": 1,\r\n    \"stationID\": 1,\r\n    \"stopTime\": 1,\r\n    \"platform\": 1000\r\n}\r\n"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE initial train",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var data = JSON.parse(responseBody);\ntests[\"ResponseBody has correct trainNumber value\"] = data.trainNumber === 12345;\ntests[\"ResponseBody has correct trainCategory value\"] = data.trainCategory === \"ICE\";\n\ntests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/update?id=1&type=train",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"trainNumber\": 12345,\r\n    \"trainCategory\": \"ICE\"\r\n}\r\n"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE initial wagon",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var data = JSON.parse(responseBody);\ntests[\"ResponseBody has correct state value\"] = data.state === \"test-update\";\n\ntests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/update?id=1&type=wagon",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"state\": \"test-update\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE initial seat",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var data = JSON.parse(responseBody);\ntests[\"ResponseBody has correct seatClass value\"] = data.seatClass === 2;\ntests[\"ResponseBody has correct seatArea value\"] = data.seatArea === \"Handy\";\ntests[\"ResponseBody has correct seatLocation value\"] = data.seatLocation === \"Gang\";\ntests[\"ResponseBody has correct seatCompartmentType value\"] = data.seatCompartmentType === \"Abteil\";\ntests[\"ResponseBody has correct upperLevel value\"] = data.upperLevel === true;\ntests[\"ResponseBody has correct wagonID value\"] = data.wagonID === 1;\ntests[\"ResponseBody has correct state value\"] = data.state === \"test-update\";\n\ntests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/update?id=1&type=seat",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \"seatClass\": 2,\r\n    \"seatArea\": \"Handy\",\r\n    \"seatLocation\": \"Gang\",\r\n    \"seatCompartmentType\": \"Abteil\",\r\n    \"upperLevel\": true,\r\n    \"wagonID\": 1,\r\n    \"state\": \"test-update\"\r\n }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE initial train_connection",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var data = JSON.parse(responseBody);\ntests[\"ResponseBody has correct routeID value\"] = data.routeID === 1;\ntests[\"ResponseBody has correct trainID value\"] = data.trainID === 1;\ntests[\"ResponseBody has correct departureTime value\"] = data.departureTime === 42300000;\ntests[\"ResponseBody has correct dayOfWeek value\"] = data.dayOfWeek === 2;\n\n\ntests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/update?id=1&type=train_connection",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"routeID\": 1,\r\n    \"trainID\": 1,\r\n    \"departureTime\": \"11:45\",\r\n    \"dayOfWeek\": \"tuesday\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE initial seat_allocation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var data = JSON.parse(responseBody);\ntests[\"ResponseBody has correct seatID value\"] = data.seatID === 1;\ntests[\"ResponseBody has correct trainConnectionID value\"] = data.trainConnectionID === 1;\ntests[\"ResponseBody has correct dapartureTime value\"] = data.departureTime === 1422789600000;\ntests[\"ResponseBody has correct arrivalTime value\"] = data.arrivalTime === 1422790800000;\n\n\ntests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/update?id=1&type=seat_allocation",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n    \"seatID\": 1,\r\n    \"trainConnectionID\": 1,\r\n    \"departureTime\": \"01-02-2015 11:20\",\r\n    \"arrivalTime\": \"01-02-2015 11:40\"\r\n  }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE initial wagon_train_connection",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var data = JSON.parse(responseBody);\ntests[\"ResponseBody has correct wagonID value\"] = data.wagonID === 1;\ntests[\"ResponseBody has correct trainConnectionID value\"] = data.trainConnectionID === 1;\ntests[\"ResponseBody has correct number value\"] = data.number === 2;\n\n\ntests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/update?id=1&type=wagon_train_connection",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n    \"wagonID\": 1,\r\n    \"trainConnectionID\": 1,\r\n    \"number\": 2\r\n  }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE initial train_connection_cancellation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var data = JSON.parse(responseBody);\ntests[\"ResponseBody has correct trainConnectionID value\"] = data.trainConnectionID === 1;\ntests[\"ResponseBody has correct day value\"] = data.day === 1430438400000;\n\n\ntests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/update?id=1&type=train_connection_cancellation",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "   {\r\n    \"trainConnectionID\": 1,\r\n    \"day\": \"01-05-2015\"\r\n  }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DISABLE initial wagon",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/disable?id=1&type=wagon",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DISABLE initial seat",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/disable?id=1&type=seat",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE initial train_connection_cancellation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/delete?id=1&type=train_connection_cancellation",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE initial wagon_train_connection",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/delete?id=1&type=wagon_train_connection",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE initial seat_allocation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/delete?id=1&type=seat_allocation",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE initial train_connection",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/delete?id=1&type=train_connection",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE initial seat",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\ntests[\"Status code is 200\"] = responseCode.code === 200;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/delete?id=1&type=seat",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE initial wagon",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/delete?id=1&type=wagon",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE initial train",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/delete?id=1&type=train",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE initial route_station",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/delete?id=1&type=route_station",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE initial station",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/delete?id=1&type=station",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE initial route",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/delete?id=1&type=route",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE duplicate train_connection_cancellation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 400\"] = responseCode.code === 400;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/delete?id=1&type=train_connection_cancellation",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE duplicate wagon_train_connection",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 400\"] = responseCode.code === 400;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/delete?id=1&type=wagon_train_connection",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE duplicate seat_allocation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 400\"] = responseCode.code === 400;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/delete?id=1&type=seat_allocation",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE duplicate train_connection",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 400\"] = responseCode.code === 400;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/delete?id=1&type=train_connection",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE duplicate seat",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 400\"] = responseCode.code === 400;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/delete?id=1&type=seat",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE duplicate wagon",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 400\"] = responseCode.code === 400;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/delete?id=1&type=wagon",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE duplicate train",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 400\"] = responseCode.code === 400;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/delete?id=1&type=train",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE duplicate route_station",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 400\"] = responseCode.code === 400;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/delete?id=1&type=route_station",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE duplicate station",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 400\"] = responseCode.code === 400;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/delete?id=1&type=station",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE duplicate route",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 400\"] = responseCode.code === 400;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/delete?id=1&type=route",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

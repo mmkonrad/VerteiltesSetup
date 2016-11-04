@@ -1,0 +1,32 @@
+{
+	"id": "b825d3d8-c642-dc3a-5c45-2b6af420bdb6",
+	"name": "Booking",
+	"values": [
+		{
+			"key": "booking1",
+			"value": "",
+			"type": "text",
+			"enabled": true,
+			"hovered": false
+		},
+		{
+			"key": "booking2",
+			"value": "",
+			"type": "text",
+			"enabled": true,
+			"hovered": false
+		},
+		{
+			"key": "booking3",
+			"value": "",
+			"type": "text",
+			"enabled": true,
+			"hovered": false
+		}
+	],
+	"timestamp": 1463582258561,
+	"synced": false,
+	"syncedFilename": "",
+	"team": null,
+	"isDeleted": false
+}

@@ -1,0 +1,521 @@
+{
+	"variables": [],
+	"info": {
+		"name": "customermanagement-jenkins",
+		"_postman_id": "46bc389c-1941-7109-0370-b1e14cc2c75b",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Customer Max",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;\n\ntests[\"responseBody contains numbers\"] = responseBody.has(\"0\") || responseBody.has(\"1\")|| responseBody.has(\"2\") || responseBody.has(\"3\") || responseBody.has(\"4\") || responseBody.has(\"5\") || responseBody.has(\"6\") || responseBody.has(\"7\") || responseBody.has(\"8\") || responseBody.has(\"9\");\n\n//Erstellen beliebig vieler Duplikate möglich"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/create-customer",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n      \"firstName\": \"Max\",\r\n      \"lastName\": \"Mustermann\",\r\n      \"address\": \"Musterstraße\",\r\n      \"houseNumber\": 1,\r\n      \"postCode\": 12345,\r\n      \"city\": \"Musterstadt\",\r\n      \"eMailAddress\":\"muster@mann.com\",\r\n      \"paymentMethod\": \"Geld\"\r\n    }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create Customer Max should still work",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;\n\ntests[\"responseBody contains numbers\"] = responseBody.has(\"0\") || responseBody.has(\"1\")|| responseBody.has(\"2\") || responseBody.has(\"3\") || responseBody.has(\"4\") || responseBody.has(\"5\") || responseBody.has(\"6\") || responseBody.has(\"7\") || responseBody.has(\"8\") || responseBody.has(\"9\");\n\n//Erstellen beliebig vieler Duplikate möglich"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/create-customer",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n      \"firstName\": \"Max\",\r\n      \"lastName\": \"Mustermann\",\r\n      \"address\": \"Musterstraße\",\r\n      \"houseNumber\": 1,\r\n      \"postCode\": 12345,\r\n      \"city\": \"Musterstadt\",\r\n      \"eMailAddress\":\"muster@mann.com\",\r\n      \"paymentMethod\": \"Geld\"\r\n    }"
+				},
+				"description": "Should return the customerID of the existing Max maybe"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Account Max=admin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;\n\ntests[\"responseBody is correct\"] = responseBody === \"Account successfully created\";\n\n//Erstellen beliebig vieler Duplikate möglich"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/create-account",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n          \"customerID\": 1,\r\n          \"username\": \"admin\",\r\n          \"password\": \"admin\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create Account Username taken",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 409\"] = responseCode.code === 409\n\ntests[\"responseBody is empty\"] = responseBody === \"Username already exists\";\n\n//Erstellen beliebig vieler Duplikate möglich"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/create-account",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n          \"customerID\": 2,\r\n          \"username\": \"admin\",\r\n          \"password\": \"admin\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create Account Customer already has an account",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 409\"] = responseCode.code === 409\n\ntests[\"responseBody is empty\"] = responseBody === \"Customer already has Account\";\n\n//Erstellen beliebig vieler Duplikate möglich"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/create-account",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n          \"customerID\": 1,\r\n          \"username\": \"admin2\",\r\n          \"password\": \"admin\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "login admin witch customerInformation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;\n\ntests[\"responseBody is not empty\"] = !(responseBody === \"\");\n\n//Erstellen beliebig vieler Duplikate möglich\n\ntests[\"Body contains customerInformation\"] = responseBody === \"{\\\"customerID\\\":1,\\\"firstName\\\":\\\"Max\\\",\\\"lastName\\\":\\\"Mustermann\\\",\\\"address\\\":\\\"Musterstraße\\\",\\\"houseNumber\\\":1,\\\"postCode\\\":12345,\\\"city\\\":\\\"Musterstadt\\\",\\\"eMailAddress\\\":\\\"muster@mann.com\\\",\\\"paymentMethod\\\":\\\"Geld\\\"}\";"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/login?username=admin&password=admin&getCustomerInformation=true",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n          \"customerID\": 13,\r\n          \"username\": \"admin\",\r\n          \"password\": \"admin\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "login admin witchout customerInformation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;\n\ntests[\"responseBody is not empty\"] = !(responseBody === \"\");\n\n\ntests[\"Body contains no customerInformation\"] = !(responseBody === \"{\\\"customerID\\\":13,\\\"firstName\\\":\\\"Max\\\",\\\"lastName\\\":\\\"Mustermann\\\",\\\"address\\\":\\\"Musterstraße\\\",\\\"houseNumber\\\":1,\\\"postCode\\\":12345,\\\"city\\\":\\\"Musterstadt\\\",\\\"eMailAddress\\\":\\\"muster@mann.com\\\",\\\"paymentMethod\\\":\\\"Geld\\\"}\");\n\n//Erstellen beliebig vieler Duplikate möglich"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/login?username=admin&password=admin&getCustomerInformation=false",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n          \"customerID\": 13,\r\n          \"username\": \"admin\",\r\n          \"password\": \"admin\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "login admin copy no optional parameter",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;\n\ntests[\"responseBody is not empty\"] = !(responseBody === \"\");\n\n\ntests[\"Body contains no customerInformation\"] = !(responseBody === \"{\\\"customerID\\\":13,\\\"firstName\\\":\\\"Max\\\",\\\"lastName\\\":\\\"Mustermann\\\",\\\"address\\\":\\\"Musterstraße\\\",\\\"houseNumber\\\":1,\\\"postCode\\\":12345,\\\"city\\\":\\\"Musterstadt\\\",\\\"eMailAddress\\\":\\\"muster@mann.com\\\",\\\"paymentMethod\\\":\\\"Geld\\\"}\");\n\n//Erstellen beliebig vieler Duplikate möglich"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/login?username=admin&password=admin",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n          \"customerID\": 13,\r\n          \"username\": \"admin\",\r\n          \"password\": \"admin\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "login fail with customerInformation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 404\"] = responseCode.code === 404;\n\n//tests[\"responseBody is empty\"] = (responseBody === \"\");\n\n\n//Erstellen beliebig vieler Duplikate möglich\n\ntests[\"Body is correct\"] = responseBody === \"Incorrect username or password\";"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/login?username=nsdkjfj&password=notadmin&getCustomerInformation=true",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n          \"customerID\": 13,\r\n          \"username\": \"admin\",\r\n          \"password\": \"admin\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "login fail without customerInformation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 404\"] = responseCode.code === 404;\n\n//tests[\"responseBody is empty\"] = (responseBody === \"\");\n\ntests[\"Body is correct\"] = responseBody === \"Incorrect username or password\";\n//Erstellen beliebig vieler Duplikate möglich"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/login?username=nsdkjfj&password=notadmin&getCustomerInformation=false",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n          \"customerID\": 13,\r\n          \"username\": \"admin\",\r\n          \"password\": \"admin\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "login fail copy no optional parameter",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 404\"] = responseCode.code === 404;\n\n//tests[\"responseBody is empty\"] = (responseBody === \"\");\n\ntests[\"Body is correct\"] = responseBody === \"Incorrect username or password\";\n//Erstellen beliebig vieler Duplikate möglich"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/login?username=nsdkjfj&password=notadmin",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n          \"customerID\": 13,\r\n          \"username\": \"admin\",\r\n          \"password\": \"admin\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create Account without username",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 400\"] = responseCode.code === 400;\n\ntests[\"responseBody is not empty\"] = responseBody === \"No username or password provided\";\n\n//Erstellen beliebig vieler Duplikate möglich"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/create-account",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n          \"customerID\": 13,\r\n          \r\n          \"password\": \"admin\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create Account without password",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 400\"] = responseCode.code === 400;\n\ntests[\"responseBody is not empty\"] = responseBody === \"No username or password provided\";\n\n//Erstellen beliebig vieler Duplikate möglich"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/create-account",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n          \"customerID\": 13,\r\n          \"username\": \"admin\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create Account without customer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 400\"] = responseCode.code === 400;\n\n\n//Erstellen beliebig vieler Duplikate möglich\n\ntests[\"Body is correct\"] = responseBody === \"No customerID provided\";"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/create-account",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n          \r\n          \"username\": \"admin\",\r\n          \"password\": \"admin\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create Account without username password",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 400\"] = responseCode.code === 400;\n\ntests[\"responseBody is not empty\"] = responseBody === \"No username or password provided\";\n\n//Erstellen beliebig vieler Duplikate möglich"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/create-account",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n          \"customerID\": 13\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

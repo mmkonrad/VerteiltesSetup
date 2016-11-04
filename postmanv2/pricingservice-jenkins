@@ -1,0 +1,283 @@
+{
+	"variables": [],
+	"info": {
+		"name": "pricing-jenkins",
+		"_postman_id": "634476b5-67f5-fa13-9699-cf1db2ed00a5",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get-price first class",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\ntests[\"Status code is 200\"] = responseCode.code === 200;\n\n\n\n//Erstellen beliebig vieler Duplikate möglich\n\ntests[\"Body is correct\"] = responseBody == 0.0;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/get-price?seatClass=1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get-price second class",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;\n\n\n\n//Erstellen beliebig vieler Duplikate möglich\n\ntests[\"Body is correct\"] = responseBody == 4.5;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/get-price?seatClass=2",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get-dynamic-price",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;\n\n\n\n//Erstellen beliebig vieler Duplikate möglich\n\ntests[\"Body is correct\"] = responseBody == 5.0;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/get-dynamic-price?seatClass=2&departureTime=26-04-2016 10:00&arrivalTime=26-04-2016 10:30&trainConnectionID=1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "increase-allocation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;\n\n\n\n//Erstellen beliebig vieler Duplikate möglich\n\ntests[\"Body is correct\"] = responseBody == \"9:10\";"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/increase-allocation?departureTime=26-04-2016 10:00&arrivalTime=26-04-2016 10:30&trainConnectionID=1",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "increase-allocation 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;\n\n\n\n//Erstellen beliebig vieler Duplikate möglich\n\ntests[\"Body is correct\"] = responseBody == \"8:10\";"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/increase-allocation?departureTime=26-04-2016 10:00&arrivalTime=26-04-2016 10:30&trainConnectionID=1",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get-dynamic-price copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;\n\n\n\n//Erstellen beliebig vieler Duplikate möglich\n\ntests[\"Body is correct\"] = responseBody == 6.25;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/get-dynamic-price?seatClass=2&departureTime=26-04-2016 10:00&arrivalTime=26-04-2016 10:30&trainConnectionID=1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "decrease-allocation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;\n\n\n\n//Erstellen beliebig vieler Duplikate möglich\n\ntests[\"Body is correct\"] = responseBody == \"9:10\";"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/decrease-allocation?departureTime=26-04-2016 10:00&arrivalTime=26-04-2016 10:30&trainConnectionID=1",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get-dynamic-price copy copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Response time is less than 1000ms\"] = responseTime < 1000;\n\ntests[\"Status code is 200\"] = responseCode.code === 200;\n\n\n\n//Erstellen beliebig vieler Duplikate möglich\n\ntests[\"Body is correct\"] = responseBody == 5.56;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:8080/get-dynamic-price?seatClass=2&departureTime=26-04-2016 10:00&arrivalTime=26-04-2016 10:30&trainConnectionID=1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
